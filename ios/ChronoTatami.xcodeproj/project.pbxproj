@@ -1,0 +1,584 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0CDFCD07D49070581665FE61 /* Barlow-600.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88122049AAD5C4416CCBD113 /* Barlow-600.ttf */; };
+		18845C863B2D42BE4817E0F3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90BDB20529EB2902FEE7A30 /* Theme.swift */; };
+		19B27F18713B510784C02530 /* Bibliotheque.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDF0812F9FD73F68A283360 /* Bibliotheque.swift */; };
+		2780F6E4F2245B96D55BFC3E /* Barlow-700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C656599CF2C2DA7C722225E /* Barlow-700.ttf */; };
+		29549ED5692A79AEE41C6C02 /* VueMontre.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF37E1ED09D1191D028CEAD6 /* VueMontre.swift */; };
+		2F28D4726AB4CCCDFBB60051 /* BigShouldersDisplay-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B61A5262B9AD1C8237FDDF51 /* BigShouldersDisplay-Black.ttf */; };
+		5178943C5C86B1B7140C82F8 /* Barlow-700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C656599CF2C2DA7C722225E /* Barlow-700.ttf */; };
+		5BE65BB8AB15A402480E8244 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90BDB20529EB2902FEE7A30 /* Theme.swift */; };
+		6771C068A816C5F78EEB9FA9 /* ChronoTatamiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304294BD127B41CFE1183D01 /* ChronoTatamiApp.swift */; };
+		6D56B3D90ED0323F96E94B3B /* ChronoMontreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B06EC9A90ADF9A3FF2D387D /* ChronoMontreApp.swift */; };
+		80998EB63C01254BC46EE6A3 /* VueCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367404E7299BAD99B675BE10 /* VueCourse.swift */; };
+		88EE2BF9D3742C9386850217 /* LienTelephone.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C8F48B8282962D7D190E9B /* LienTelephone.swift */; };
+		8A9FA6BA0F54AB3004D1768B /* 2026-11-19-debutants-dojo.md in Resources */ = {isa = PBXBuildFile; fileRef = 71DC60D5C8CF695E0BBB868A /* 2026-11-19-debutants-dojo.md */; };
+		8CB9CEB5FDAF1C951FAD0B51 /* VuePrep.swift in Sources */ = {isa = PBXBuildFile; fileRef = D416796D45531EB71FC8E493 /* VuePrep.swift */; };
+		ACDA565402C4273F7AB9DB9A /* ListeSeances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4186861D232C5FA0F559F5C9 /* ListeSeances.swift */; };
+		B73CA49A45A77045FC28FBD1 /* BigShouldersDisplay-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B61A5262B9AD1C8237FDDF51 /* BigShouldersDisplay-Black.ttf */; };
+		C43A87F8EC22D00F68A6E929 /* ChronoTatamiMontre.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 29FCD2DA287FAEE29FA1E51D /* ChronoTatamiMontre.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFB19638D4CC7758DA152F71 /* Barlow-600.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88122049AAD5C4416CCBD113 /* Barlow-600.ttf */; };
+		CFE7817940895AB53C2464F2 /* ChronoTatamiCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9629D2D5798AC28E5FB7ECDE /* ChronoTatamiCore */; };
+		D83A68F852E2D8684CB7F6D8 /* LienMontre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C0EEE2DFD67AA91116A18 /* LienMontre.swift */; };
+		D9F0900CF198A78710F1628F /* Sons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F460D16CE178D0917CFD87 /* Sons.swift */; };
+		DE94B3A371B40C86262D7F2E /* Seance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1C0FABA7B2E243A59F10B5 /* Seance.swift */; };
+		E0C21937B675C6909F208EFE /* ChronoTatamiCore in Frameworks */ = {isa = PBXBuildFile; productRef = 66EC37105F394CB49513A5A6 /* ChronoTatamiCore */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1A0708687C7041FF1265D740 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B381AE595E01860C2FC38D07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B9423992A1D15B0591F4A83;
+			remoteInfo = ChronoTatamiMontre;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A9538C199AE7A2EF81C39E0F /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				C43A87F8EC22D00F68A6E929 /* ChronoTatamiMontre.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0B06EC9A90ADF9A3FF2D387D /* ChronoMontreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChronoMontreApp.swift; sourceTree = "<group>"; };
+		1AA75B76B51F009C81232886 /* ChronoTatami.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ChronoTatami.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		232ACC5AF45607AC03CAD7B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		29FCD2DA287FAEE29FA1E51D /* ChronoTatamiMontre.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChronoTatamiMontre.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		304294BD127B41CFE1183D01 /* ChronoTatamiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChronoTatamiApp.swift; sourceTree = "<group>"; };
+		367404E7299BAD99B675BE10 /* VueCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VueCourse.swift; sourceTree = "<group>"; };
+		4186861D232C5FA0F559F5C9 /* ListeSeances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeSeances.swift; sourceTree = "<group>"; };
+		4CA0D99407A93FB0B74D0A6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		71DC60D5C8CF695E0BBB868A /* 2026-11-19-debutants-dojo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "2026-11-19-debutants-dojo.md"; sourceTree = "<group>"; };
+		7C656599CF2C2DA7C722225E /* Barlow-700.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Barlow-700.ttf"; sourceTree = "<group>"; };
+		88122049AAD5C4416CCBD113 /* Barlow-600.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Barlow-600.ttf"; sourceTree = "<group>"; };
+		8B1C0FABA7B2E243A59F10B5 /* Seance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seance.swift; sourceTree = "<group>"; };
+		8CDF0812F9FD73F68A283360 /* Bibliotheque.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bibliotheque.swift; sourceTree = "<group>"; };
+		904C0EEE2DFD67AA91116A18 /* LienMontre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LienMontre.swift; sourceTree = "<group>"; };
+		A7F460D16CE178D0917CFD87 /* Sons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sons.swift; sourceTree = "<group>"; };
+		AF37E1ED09D1191D028CEAD6 /* VueMontre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VueMontre.swift; sourceTree = "<group>"; };
+		B4C8F48B8282962D7D190E9B /* LienTelephone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LienTelephone.swift; sourceTree = "<group>"; };
+		B61A5262B9AD1C8237FDDF51 /* BigShouldersDisplay-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BigShouldersDisplay-Black.ttf"; sourceTree = "<group>"; };
+		C90BDB20529EB2902FEE7A30 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		D2D9C209DDC9FE2BE6E8609B /* ChronoTatamiCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ChronoTatamiCore; path = ChronoTatamiCore; sourceTree = SOURCE_ROOT; };
+		D416796D45531EB71FC8E493 /* VuePrep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuePrep.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7E9472370287A04DDF5DD81A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E0C21937B675C6909F208EFE /* ChronoTatamiCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C929B8C2E9B58CF57CC2FB0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFE7817940895AB53C2464F2 /* ChronoTatamiCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01A97CD6B92BBD715E8D1D27 /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+				9A1C213ADF9D1716E3CA95AB /* Seances */,
+			);
+			path = Ressources;
+			sourceTree = "<group>";
+		};
+		0D19F1C08C1730B36507082A /* Montre */ = {
+			isa = PBXGroup;
+			children = (
+				0B06EC9A90ADF9A3FF2D387D /* ChronoMontreApp.swift */,
+				4CA0D99407A93FB0B74D0A6C /* Info.plist */,
+				B4C8F48B8282962D7D190E9B /* LienTelephone.swift */,
+				AF37E1ED09D1191D028CEAD6 /* VueMontre.swift */,
+			);
+			path = Montre;
+			sourceTree = "<group>";
+		};
+		49956E6B0656F8F9F057EE7B /* Telephone */ = {
+			isa = PBXGroup;
+			children = (
+				8CDF0812F9FD73F68A283360 /* Bibliotheque.swift */,
+				304294BD127B41CFE1183D01 /* ChronoTatamiApp.swift */,
+				232ACC5AF45607AC03CAD7B9 /* Info.plist */,
+				904C0EEE2DFD67AA91116A18 /* LienMontre.swift */,
+				4186861D232C5FA0F559F5C9 /* ListeSeances.swift */,
+				8B1C0FABA7B2E243A59F10B5 /* Seance.swift */,
+				A7F460D16CE178D0917CFD87 /* Sons.swift */,
+				367404E7299BAD99B675BE10 /* VueCourse.swift */,
+				D416796D45531EB71FC8E493 /* VuePrep.swift */,
+				01A97CD6B92BBD715E8D1D27 /* Ressources */,
+			);
+			path = Telephone;
+			sourceTree = "<group>";
+		};
+		5C33C84ACF5D72171C77026F /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				D2D9C209DDC9FE2BE6E8609B /* ChronoTatamiCore */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		9A1C213ADF9D1716E3CA95AB /* Seances */ = {
+			isa = PBXGroup;
+			children = (
+				71DC60D5C8CF695E0BBB868A /* 2026-11-19-debutants-dojo.md */,
+			);
+			path = Seances;
+			sourceTree = "<group>";
+		};
+		D42561D833F2EC9A58126521 /* Partage */ = {
+			isa = PBXGroup;
+			children = (
+				C90BDB20529EB2902FEE7A30 /* Theme.swift */,
+				F45E2AFA74B8667104692E49 /* Polices */,
+			);
+			path = Partage;
+			sourceTree = "<group>";
+		};
+		E105EF2962F588795CDDBA99 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1AA75B76B51F009C81232886 /* ChronoTatami.app */,
+				29FCD2DA287FAEE29FA1E51D /* ChronoTatamiMontre.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F45E2AFA74B8667104692E49 /* Polices */ = {
+			isa = PBXGroup;
+			children = (
+				88122049AAD5C4416CCBD113 /* Barlow-600.ttf */,
+				7C656599CF2C2DA7C722225E /* Barlow-700.ttf */,
+				B61A5262B9AD1C8237FDDF51 /* BigShouldersDisplay-Black.ttf */,
+			);
+			path = Polices;
+			sourceTree = "<group>";
+		};
+		FF92CAAF67A9EE3A7545F914 = {
+			isa = PBXGroup;
+			children = (
+				0D19F1C08C1730B36507082A /* Montre */,
+				5C33C84ACF5D72171C77026F /* Packages */,
+				D42561D833F2EC9A58126521 /* Partage */,
+				49956E6B0656F8F9F057EE7B /* Telephone */,
+				E105EF2962F588795CDDBA99 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		87D50DBB674DA09FDB613E2E /* ChronoTatami */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDBFE5BA3493D75E15160702 /* Build configuration list for PBXNativeTarget "ChronoTatami" */;
+			buildPhases = (
+				BC30B6AED806F10EB62E7A19 /* Sources */,
+				B1603095D7BFA69B471B15B8 /* Resources */,
+				7E9472370287A04DDF5DD81A /* Frameworks */,
+				A9538C199AE7A2EF81C39E0F /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BD67A320E33DBC5B891AD679 /* PBXTargetDependency */,
+			);
+			name = ChronoTatami;
+			packageProductDependencies = (
+				66EC37105F394CB49513A5A6 /* ChronoTatamiCore */,
+			);
+			productName = ChronoTatami;
+			productReference = 1AA75B76B51F009C81232886 /* ChronoTatami.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8B9423992A1D15B0591F4A83 /* ChronoTatamiMontre */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 77B7AACF9633CAA0BA83996C /* Build configuration list for PBXNativeTarget "ChronoTatamiMontre" */;
+			buildPhases = (
+				36C3D4A5C437DA1F2209C77B /* Sources */,
+				110AE9A176531D82525510A5 /* Resources */,
+				C929B8C2E9B58CF57CC2FB0A /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChronoTatamiMontre;
+			packageProductDependencies = (
+				9629D2D5798AC28E5FB7ECDE /* ChronoTatamiCore */,
+			);
+			productName = ChronoTatamiMontre;
+			productReference = 29FCD2DA287FAEE29FA1E51D /* ChronoTatamiMontre.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B381AE595E01860C2FC38D07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					87D50DBB674DA09FDB613E2E = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					8B9423992A1D15B0591F4A83 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 2E54766FE078BD1420AB3D12 /* Build configuration list for PBXProject "ChronoTatami" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = FF92CAAF67A9EE3A7545F914;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				3F2BD66B75B9723CC7C9DE84 /* XCLocalSwiftPackageReference "ChronoTatamiCore" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = E105EF2962F588795CDDBA99 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				87D50DBB674DA09FDB613E2E /* ChronoTatami */,
+				8B9423992A1D15B0591F4A83 /* ChronoTatamiMontre */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		110AE9A176531D82525510A5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CDFCD07D49070581665FE61 /* Barlow-600.ttf in Resources */,
+				5178943C5C86B1B7140C82F8 /* Barlow-700.ttf in Resources */,
+				2F28D4726AB4CCCDFBB60051 /* BigShouldersDisplay-Black.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1603095D7BFA69B471B15B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A9FA6BA0F54AB3004D1768B /* 2026-11-19-debutants-dojo.md in Resources */,
+				CFB19638D4CC7758DA152F71 /* Barlow-600.ttf in Resources */,
+				2780F6E4F2245B96D55BFC3E /* Barlow-700.ttf in Resources */,
+				B73CA49A45A77045FC28FBD1 /* BigShouldersDisplay-Black.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		36C3D4A5C437DA1F2209C77B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D56B3D90ED0323F96E94B3B /* ChronoMontreApp.swift in Sources */,
+				88EE2BF9D3742C9386850217 /* LienTelephone.swift in Sources */,
+				18845C863B2D42BE4817E0F3 /* Theme.swift in Sources */,
+				29549ED5692A79AEE41C6C02 /* VueMontre.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC30B6AED806F10EB62E7A19 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19B27F18713B510784C02530 /* Bibliotheque.swift in Sources */,
+				6771C068A816C5F78EEB9FA9 /* ChronoTatamiApp.swift in Sources */,
+				D83A68F852E2D8684CB7F6D8 /* LienMontre.swift in Sources */,
+				ACDA565402C4273F7AB9DB9A /* ListeSeances.swift in Sources */,
+				DE94B3A371B40C86262D7F2E /* Seance.swift in Sources */,
+				D9F0900CF198A78710F1628F /* Sons.swift in Sources */,
+				5BE65BB8AB15A402480E8244 /* Theme.swift in Sources */,
+				80998EB63C01254BC46EE6A3 /* VueCourse.swift in Sources */,
+				8CB9CEB5FDAF1C951FAD0B51 /* VuePrep.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BD67A320E33DBC5B891AD679 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8B9423992A1D15B0591F4A83 /* ChronoTatamiMontre */;
+			targetProxy = 1A0708687C7041FF1265D740 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		252E2DB031518F93E6A7DDDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		3102467E2286AC6E684340ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Telephone/Info.plist;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.xaviersdk.chronotatami;
+				PRODUCT_NAME = "Chrono Tatami";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		7113F459055CD2D85626E733 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Montre/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xaviersdk.chronotatami.watchkitapp;
+				PRODUCT_NAME = "Chrono Tatami";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
+		8179D151FF128DC89CCC8380 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Telephone/Info.plist;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.xaviersdk.chronotatami;
+				PRODUCT_NAME = "Chrono Tatami";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		DE6B8E1547D4C8994E433F20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Montre/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xaviersdk.chronotatami.watchkitapp;
+				PRODUCT_NAME = "Chrono Tatami";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
+		F500EB85635A1BA865D2CFF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2E54766FE078BD1420AB3D12 /* Build configuration list for PBXProject "ChronoTatami" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F500EB85635A1BA865D2CFF6 /* Debug */,
+				252E2DB031518F93E6A7DDDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		77B7AACF9633CAA0BA83996C /* Build configuration list for PBXNativeTarget "ChronoTatamiMontre" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE6B8E1547D4C8994E433F20 /* Debug */,
+				7113F459055CD2D85626E733 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BDBFE5BA3493D75E15160702 /* Build configuration list for PBXNativeTarget "ChronoTatami" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3102467E2286AC6E684340ED /* Debug */,
+				8179D151FF128DC89CCC8380 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		3F2BD66B75B9723CC7C9DE84 /* XCLocalSwiftPackageReference "ChronoTatamiCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ChronoTatamiCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		66EC37105F394CB49513A5A6 /* ChronoTatamiCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ChronoTatamiCore;
+		};
+		9629D2D5798AC28E5FB7ECDE /* ChronoTatamiCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ChronoTatamiCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = B381AE595E01860C2FC38D07 /* Project object */;
+}
