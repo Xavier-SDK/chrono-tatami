@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chrono Tatami</title>
+<meta name="description" content="Le chrono qui anime les cours de Krav Maga à partir de la fiche .md.">
+<meta name="theme-color" content="#0B0B0C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Chrono Tatami">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/favicon-64.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<!-- 1 · Mes séances -->
+<main class="view" id="vHome">
+  <div class="hrow">
+    <div class="brand">Chrono Tatami</div>
+    <span class="sp"></span>
+    <button class="icon-btn" data-go="vSettings" aria-label="Réglages"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button>
+  </div>
+  <h1>Mes séances</h1>
+  <a class="resume" id="resume" hidden href="#" role="button"><b>Séance en cours</b><span id="resumeTxt"></span><em>Reprendre</em></a>
+  <div id="list" class="list"></div>
+  <div class="install" id="install" hidden>
+    <b>Installer l'app</b>
+    <span>Dans Safari : bouton Partager, puis « Sur l'écran d'accueil ». L'app marchera ensuite sans réseau.</span>
+  </div>
+  <span class="grow"></span>
+  <button class="cta ghost" data-go="vImport"><svg viewBox="0 0 24 24"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/><path d="M12 11v6M9 14h6"/></svg>Importer un cours .md</button>
+</main>
+
+<!-- 2 · Importer -->
+<main class="view" id="vImport" hidden>
+  <div class="hrow">
+    <button class="icon-btn" data-go="vHome" aria-label="Retour à Mes séances"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <h2>Importer un cours</h2>
+  </div>
+  <label class="cta ghost file"><svg viewBox="0 0 24 24"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/></svg>Ouvrir un fichier .md<input type="file" id="fileIn"></label>
+  <p class="hint">Depuis le mail de Claude : appui long sur la pièce jointe, « Enregistrer dans Fichiers », puis ouvre-la ici. Ou colle le texte :</p>
+  <label for="mdIn" class="lab">Contenu du cours</label>
+  <textarea id="mdIn" spellcheck="false" placeholder="---&#10;titre: Krav Maga - Débutants&#10;date: 19/11/2026&#10;…"></textarea>
+  <button class="btn" id="bCheck">Vérifier</button>
+  <div id="report" hidden>
+    <div class="verdict" id="verdict"></div>
+    <ul class="checks" id="checks"></ul>
+    <ul class="errs" id="errs"></ul>
+  </div>
+  <span class="grow"></span>
+  <button class="cta" id="bAddSeance" disabled>Ajouter à mes séances</button>
+</main>
+
+<!-- 3 · Séance du jour -->
+<main class="view" id="vSeance" hidden>
+  <div class="hrow">
+    <button class="icon-btn" data-go="vHome" aria-label="Retour à Mes séances"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <div class="eyebrow" id="sEyebrow"></div>
+  </div>
+  <h1 id="sTitle" class="h-seance"></h1>
+  <p class="sub" id="sSub"></p>
+  <div class="obj" id="sObj" hidden></div>
+  <div class="compo" id="sCompo"></div>
+  <div class="tl" id="sTl"></div>
+  <div class="chips" id="sMat"></div>
+  <span class="grow"></span>
+  <button class="cta" data-go="vPrep">Préparer le cours<svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+  <button class="link-danger" id="bDelete">Retirer cette séance</button>
+</main>
+
+<!-- 5 · Préparation -->
+<main class="view" id="vPrep" hidden>
+  <div class="hrow">
+    <button class="icon-btn" data-go="vSeance" aria-label="Retour à la séance"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <div class="eyebrow" id="pEyebrow"></div>
+  </div>
+  <h1>Prêt ?</h1>
+  <div class="lab" id="pMatLab">Matériel à sortir</div>
+  <div class="checklist" id="pMat"></div>
+  <div class="lab">Pendant le cours</div>
+  <div class="toggles" id="pToggles"></div>
+  <span class="grow"></span>
+  <p class="hint center">Pose le téléphone, écran vers le tatami. Touche l'écran pour la pause.</p>
+  <button class="cta big" id="bGo"><svg viewBox="0 0 24 24" class="fillico"><path d="M6 4l14 8-14 8z"/></svg>Salut · Go</button>
+</main>
+
+<!-- 6 · Animation -->
+<div class="run" id="vRun" hidden>
+  <div class="topb" id="tap1">
+    <div class="pill"><svg id="pIco" viewBox="0 0 24 24"></svg><span id="pTxt"></span></div>
+    <div class="ttl" id="ttl"></div>
+    <div class="rp" id="rp"></div>
+    <div class="rc" id="rc"></div>
+  </div>
+  <div class="mid" id="tap2">
+    <div class="fill" id="fill"></div>
+    <div class="bar8" id="bar8"></div>
+    <div class="layer" id="layA"><div class="lbl"></div><div class="dig"></div></div>
+    <div class="layer" id="layB"><div class="lbl"></div><div class="dig"></div></div>
+  </div>
+  <div class="botb">
+    <span class="bk">Ensuite</span>
+    <span class="nx" id="nx"></span>
+    <span class="nd" id="nd"></span>
+    <span class="sp"></span>
+    <span class="el" id="el"></span>
+    <span class="pg"><b id="pg"></b></span>
+    <span class="fin" id="fin"></span>
+  </div>
+
+  <div class="ov ov-role" id="ovRole">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h15"/><path d="M15 4l4 4-4 4"/><path d="M20 16H5"/><path d="M9 12l-4 4 4 4"/></svg>
+    <div class="rtxt"><div class="k1" id="roleK"></div><div class="t1"><span>C</span><span>h</span><span>a</span><span>n</span><span>g</span><span>e</span><span>z</span><br><span>d</span><span>e</span> <span>r</span><span>ô</span><span>l</span><span>e</span></div><div class="s1" id="roleS"></div></div>
+  </div>
+  <div class="ov ov-next" id="ovNext">
+    <div class="ticks" id="ticks"></div>
+    <div class="nbody">
+      <div class="cnt" id="cnt"></div>
+      <div class="col"><div class="k1" id="nK"></div><div class="t1" id="nT"></div><div class="s1" id="nS"></div><div class="mt" id="nM"></div></div>
+    </div>
+    <div class="sb"><span id="nE"></span><b id="nR"></b></div>
+  </div>
+
+  <div class="sheet" id="sheet" hidden>
+    <div class="sheet-l">
+      <div class="paused"><svg viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg>En pause</div>
+      <div class="sdig" id="shDig"></div>
+      <div class="sttl" id="shTtl"></div>
+      <div class="ssub" id="shSub"></div>
+      <div class="sadd" id="shAdd"></div>
+    </div>
+    <div class="sheet-r">
+      <button class="sbtn go" id="bResume"><svg viewBox="0 0 24 24" class="fillico"><path d="M6 4l14 8-14 8z"/></svg>Reprendre</button>
+      <button class="sbtn" id="bPlus">+30 s</button>
+      <button class="sbtn" id="bMinus">−30 s</button>
+      <button class="sbtn" id="bBack"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>Revenir</button>
+      <button class="sbtn" id="bSkip">Passer<svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+      <button class="sbtn stop" id="bStop">Terminer la séance</button>
+    </div>
+  </div>
+</div>
+
+<!-- 7 · Fin de séance -->
+<main class="view" id="vEnd" hidden>
+  <div class="eyebrow muted" id="eEyebrow">Séance terminée</div>
+  <h1 class="lime">Bien joué</h1>
+  <div class="stats">
+    <div><span>Prévu</span><b id="ePlan"></b></div>
+    <div><span>Réel</span><b id="eReal"></b></div>
+  </div>
+  <div class="box" id="eGaps"></div>
+  <div class="box blue" id="eDeb" hidden></div>
+  <label for="eNote" class="lab">Note du coach</label>
+  <textarea id="eNote" class="note" placeholder="Ce qui a marché, ce qui a coincé, à revoir…"></textarea>
+  <span class="grow"></span>
+  <button class="cta" id="bShare">Envoyer le bilan à Claude</button>
+  <p class="hint center" id="shareHint">Un texte .md : prévu, réel, ta note. Colle-le à Claude pour ajuster le cours suivant.</p>
+  <button class="btn" data-go="vHome">Retour à mes séances</button>
+</main>
+
+<!-- 8 · Réglages -->
+<main class="view" id="vSettings" hidden>
+  <div class="hrow">
+    <button class="icon-btn" data-go="vHome" aria-label="Retour à Mes séances"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <h2>Réglages</h2>
+  </div>
+  <div class="lab">Sons et voix</div>
+  <div class="toggles" id="setSound"></div>
+  <div class="lab">Affichage</div>
+  <div class="toggles" id="setScreen"></div>
+  <div class="lab">Essai</div>
+  <div class="toggles" id="setTest"></div>
+  <div class="lab">Couleurs des phases</div>
+  <div class="swatches">
+    <div><i style="background:#F2EFE6"></i>Salut</div>
+    <div><i style="background:#FF7A1A"></i>Échauf.</div>
+    <div><i style="background:#C6FF1A"></i>Techniques</div>
+    <div><i style="background:#FF3B30"></i>Pratique</div>
+    <div><i style="background:#3DB8FF"></i>Calme</div>
+  </div>
+  <span class="grow"></span>
+  <p class="hint center" id="version"></p>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="parse-cours.js"></script>
+<script src="seances.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
