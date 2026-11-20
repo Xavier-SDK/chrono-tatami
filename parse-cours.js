@@ -11,10 +11,10 @@ function parseCours(md){
     const L=lines[i];let m;
     if((m=L.match(/^#\s+(.*)/))){titre=m[1].trim();continue;}
     if((m=L.match(/^>\s*\*\*Objectif\s*:\*\*\s*(.*)/i))){objectif=m[1].trim();continue;}
-    if((m=L.match(/^##\s+(.*?)\s*·\s*(.*)$/))||(m=L.match(/^##\s+(.*)$/))){sec={titre:m[1].trim(),prevu:m[2]?mins(m[2]):null,kind:kind(m[1]),blocs:[]};sections.push(sec);bloc=null;continue;}
+    if((m=L.match(/^##\s+(.*?)\s*·\s*(.*)$/))||(m=L.match(/^##\s+(.*)$/))){const mu=/♪/.test(L),t=m[1].replace(/♪/g,'').trim();sec={titre:t,prevu:m[2]?mins(m[2]):null,kind:kind(t),musique:mu,blocs:[]};sections.push(sec);bloc=null;continue;}
     if((m=L.match(/^###\s+(.*?)\s*·\s*(.*)$/))||(m=L.match(/^###\s+(.*)$/))){
-      if(!sec){sec={titre:'Séance',prevu:null,kind:'techniques',blocs:[]};sections.push(sec);}
-      bloc={titre:m[1].trim(),prevu:m[2]?mins(m[2]):null,section:/^salut/i.test(m[1].trim())?'ouverture':sec.kind,description:[],consigne:'',materiel:'',debrief:'',sequences:[]};sec.blocs.push(bloc);continue;}
+      if(!sec){sec={titre:'Séance',prevu:null,kind:'techniques',musique:false,blocs:[]};sections.push(sec);}
+      bloc={titre:m[1].trim(),sec:sections.length-1,prevu:m[2]?mins(m[2]):null,section:/^salut/i.test(m[1].trim())?'ouverture':sec.kind,description:[],consigne:'',materiel:'',debrief:'',sequences:[]};sec.blocs.push(bloc);continue;}
     if(!bloc)continue;
     if((m=L.match(/^-\s*\[(travail|repos|consigne)\]\s*(.*)$/i))){
       const parts=m[2].split(/\s*·\s*/);let mid='';const k=parts.findIndex(p=>p.startsWith('⇄'));if(k>=0){mid=parts[k].replace('⇄','').trim();parts.splice(k,1);}

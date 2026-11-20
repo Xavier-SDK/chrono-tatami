@@ -1,7 +1,7 @@
 /* Chrono Tatami : fonctionnement hors ligne (tout est mis en cache à l'installation) */
-const CACHE = 'chrono-tatami-v1';
+const CACHE = 'chrono-tatami-v2';
 const FILES = [
-  './', 'index.html', 'app.css', 'fonts.css', 'app.js', 'parse-cours.js', 'seances.js', 'manifest.webmanifest',
+  './', 'index.html', 'app.css', 'fonts.css', 'app.js', 'parse-cours.js', 'seances.js', 'musique.js', 'manifest.webmanifest',
   'fonts/BigShouldersDisplay-800.woff2', 'fonts/BigShouldersDisplay-900.woff2',
   'fonts/Barlow-500.woff2', 'fonts/Barlow-600.woff2', 'fonts/Barlow-700.woff2',
   'icons/apple-touch-icon.png', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png', 'icons/favicon-64.png'
