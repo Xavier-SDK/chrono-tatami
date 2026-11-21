@@ -36,6 +36,7 @@ final class Seance {
     init(cours: Cours, depuisBloc: Int, voix: Bool, voixChaqueRound: Bool, playlist: Playlist, sectionsMusique: Set<Int>) {
         var c = Chrono(cours: cours, depuisBloc: depuisBloc)
         c.voixChaqueRound = voixChaqueRound
+        c.coach = Voix.coach
         chrono = c
         etat = c.etat
         sons.voixActive = voix
@@ -133,6 +134,7 @@ final class Seance {
             case let .voix(t, forcee): sons.dire(t, forcee: forcee)
             case let .changementDeRole(t): miRound = t; finMiRound = Date().addingTimeInterval(3)
             case .nouveauBloc: break
+            case let .encouragement(x): sons.encourager(x)
             case .fin: UIApplication.shared.isIdleTimerDisabled = false
             }
         }

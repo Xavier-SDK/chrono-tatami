@@ -10,6 +10,17 @@ public enum Evenement: Equatable, Sendable {
     case changementDeRole(String)
     case nouveauBloc(Int)
     case fin
+    case encouragement(Encouragement)
+}
+
+/// Relances du coach pendant la séance (mode coach).
+public enum Encouragement: String, CaseIterable, Sendable {
+    case debutTravail       // « C'est parti ! »
+    case miTravail          // « On tient le rythme ! »
+    case dixSecondes        // « Plus que 10 secondes, à fond ! »
+    case dernierRound       // « Dernier round, on donne tout ! »
+    case repos              // « Respirez, on récupère. »
+    case fin                // « Bravo, beau travail ! »
 }
 
 /// Une séquence placée sur la ligne de temps de la séance.
@@ -38,6 +49,8 @@ public struct Chrono: Sendable {
     public let segs: [Segment]
     public let total: Int
     public var voixChaqueRound = false
+    /// Mode coach : relances pendant le travail, le repos, le dernier round.
+    public var coach = false
 
     public private(set) var index = 0
     public private(set) var restant: Double = 0
@@ -87,8 +100,13 @@ public struct Chrono: Sendable {
             if !q.sequence.miRound.isEmpty, avant > cd / 2, restant <= cd / 2 {
                 ev += [.triple, .voix(q.sequence.miRound), .changementDeRole(q.sequence.miRound)]
             }
-            if let nx = suivant, nx.bloc != q.bloc, avant > 10, restant <= 10 {
+            let blocSuivant = suivant.map { $0.bloc != q.bloc } ?? false
+            if blocSuivant, let nx = suivant, avant > 10, restant <= 10 {
                 ev.append(.voix("Dans 10 secondes : " + cours.blocs[nx.bloc].titre))
+            }
+            if coach, q.sequence.type == .travail {
+                if !blocSuivant, cd >= 30, avant > 10, restant <= 10 { ev.append(.encouragement(.dixSecondes)) }
+                if q.sequence.miRound.isEmpty, cd >= 60, avant > cd / 2, restant <= cd / 2 { ev.append(.encouragement(.miTravail)) }
             }
         }
         while restant <= 0 && !termine {
@@ -119,8 +137,13 @@ public struct Chrono: Sendable {
             }
         } else if !silencieux {
             if q.sequence.type == .repos {
+                if coach, q.sequence.duree >= 15 { ev.append(.encouragement(.repos)) }
                 if voixChaqueRound { ev.append(.voix(q.sequence.libelle)) }
             } else {
+                if coach, q.sequence.type == .travail {
+                    let travaux = b.sequences.indices.filter { b.sequences[$0].type == .travail }
+                    ev.append(.encouragement(travaux.count > 1 && travaux.last == q.rang ? .dernierRound : .debutTravail))
+                }
                 ev.append(.double)
                 if voixChaqueRound {
                     ev.append(.voix(q.sequence.libelle.components(separatedBy: "·")[0].trimmingCharacters(in: .whitespaces)))
@@ -133,7 +156,8 @@ public struct Chrono: Sendable {
     private mutating func finir(silencieux: Bool) -> [Evenement] {
         termine = true
         enMarche = false
-        return silencieux ? [.fin] : [.gong, .voix("Fin de la séance. Salut.", forcee: true), .fin]
+        if silencieux { return [.fin] }
+        return coach ? [.gong, .encouragement(.fin), .fin] : [.gong, .voix("Fin de la séance. Salut.", forcee: true), .fin]
     }
 
     // MARK: Commandes de la pause (iPhone ou montre)

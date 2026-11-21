@@ -10,6 +10,7 @@
 		0CDFCD07D49070581665FE61 /* Barlow-600.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88122049AAD5C4416CCBD113 /* Barlow-600.ttf */; };
 		18845C863B2D42BE4817E0F3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90BDB20529EB2902FEE7A30 /* Theme.swift */; };
 		19B27F18713B510784C02530 /* Bibliotheque.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDF0812F9FD73F68A283360 /* Bibliotheque.swift */; };
+		2134C78A1299365949EC4A73 /* Voix.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66C4E33020DFD9CBB4F01DE /* Voix.swift */; };
 		2780F6E4F2245B96D55BFC3E /* Barlow-700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C656599CF2C2DA7C722225E /* Barlow-700.ttf */; };
 		29549ED5692A79AEE41C6C02 /* VueMontre.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF37E1ED09D1191D028CEAD6 /* VueMontre.swift */; };
 		2B2D93532F2BD80860021B01 /* crossfit-seance-type.md in Resources */ = {isa = PBXBuildFile; fileRef = 878BBA4067F49CFF7C0A726B /* crossfit-seance-type.md */; };
@@ -91,6 +92,7 @@
 		D416796D45531EB71FC8E493 /* VuePrep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuePrep.swift; sourceTree = "<group>"; };
 		E550D811CE8083F55A89301F /* VueReglages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VueReglages.swift; sourceTree = "<group>"; };
 		EE79BAC4C0C29860EF93570B /* AppleMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusic.swift; sourceTree = "<group>"; };
+		F66C4E33020DFD9CBB4F01DE /* Voix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voix.swift; sourceTree = "<group>"; };
 		F6FAAC1DB8365E1BF124747E /* Musique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Musique.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,6 +149,7 @@
 				F6FAAC1DB8365E1BF124747E /* Musique.swift */,
 				8B1C0FABA7B2E243A59F10B5 /* Seance.swift */,
 				A7F460D16CE178D0917CFD87 /* Sons.swift */,
+				F66C4E33020DFD9CBB4F01DE /* Voix.swift */,
 				367404E7299BAD99B675BE10 /* VueCourse.swift */,
 				1A9F001D28E40A9816E86607 /* VuePlaylist.swift */,
 				D416796D45531EB71FC8E493 /* VuePrep.swift */,
@@ -351,6 +354,7 @@
 				DE94B3A371B40C86262D7F2E /* Seance.swift in Sources */,
 				D9F0900CF198A78710F1628F /* Sons.swift in Sources */,
 				5BE65BB8AB15A402480E8244 /* Theme.swift in Sources */,
+				2134C78A1299365949EC4A73 /* Voix.swift in Sources */,
 				80998EB63C01254BC46EE6A3 /* VueCourse.swift in Sources */,
 				75DC15B86B965DA867E53E09 /* VuePlaylist.swift in Sources */,
 				8CB9CEB5FDAF1C951FAD0B51 /* VuePrep.swift in Sources */,

@@ -1,4 +1,5 @@
 import AVFoundation
+import ChronoTatamiCore
 
 /// Bips, gong et voix. Le moteur audio reste actif pendant la séance : l'app continue de tourner écran verrouillé.
 @MainActor
@@ -64,16 +65,41 @@ final class Sons {
 
     func dire(_ texte: String, forcee: Bool = false) {
         guard voixActive || forcee else { return }
-        let propre = texte.replacingOccurrences(of: #"(\d)/(\d)"#, with: "$1 sur $2", options: .regularExpression)
-            .replacingOccurrences(of: #"[·«»⇄]"#, with: " ", options: .regularExpression)
-        let u = AVSpeechUtterance(string: propre)
-        u.voice = AVSpeechSynthesisVoice(language: "fr-FR")
-        u.rate = AVSpeechUtteranceDefaultSpeechRate * 1.05
-        voix.stopSpeaking(at: .immediate)
+        let u = Voix.annonce(texte)
+        // Juste après une relance du coach, l'annonce passe à la suite au lieu de la couper.
+        if Date().timeIntervalSince(relance) > 0.5 { voix.stopSpeaking(at: .immediate) }
+        if let c = clip, c.isPlaying { u.preUtteranceDelay = c.duration - c.currentTime + 0.1 }
         voix.speak(u)
     }
+    private var relance = Date.distantPast
 
-    var voixEnCours: Bool { voix.isSpeaking }
+    /// Relance du coach : un enregistrement s'il y en a dans l'app (Coach/<cas>-<n>.m4a), sinon la synthèse vocale.
+    private var clip: AVAudioPlayer?
+    private var derniere: [Encouragement: String] = [:]
+    func encourager(_ e: Encouragement) {
+        guard voixActive || e == .fin else { return }
+        if let url = Self.clips(e).filter({ $0.lastPathComponent != derniere[e] }).randomElement() ?? Self.clips(e).first,
+           let p = try? AVAudioPlayer(contentsOf: url) {
+            derniere[e] = url.lastPathComponent
+            voix.stopSpeaking(at: .immediate)
+            clip?.stop()
+            clip = p
+            p.play()
+            relance = Date()
+            return
+        }
+        let choix = Voix.phrases(e).filter { $0 != derniere[e] }.randomElement() ?? Voix.phrases(e)[0]
+        derniere[e] = choix
+        dire(choix, forcee: true)
+        relance = Date()
+    }
+
+    private static func clips(_ e: Encouragement) -> [URL] {
+        ["m4a", "mp3", "wav"].flatMap { Bundle.main.urls(forResourcesWithExtension: $0, subdirectory: nil) ?? [] }
+            .filter { $0.lastPathComponent.hasPrefix("coach-\(e.rawValue)-") }
+    }
+
+    var voixEnCours: Bool { voix.isSpeaking || clip?.isPlaying == true }
 
     /// Somme de sinus amortis : (fréquence, départ en secondes).
     private func ton(_ notes: [(Double, Double)], duree: Double, decroissance: Double) -> AVAudioPCMBuffer {
