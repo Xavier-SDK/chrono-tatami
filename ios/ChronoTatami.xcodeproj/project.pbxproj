@@ -12,6 +12,7 @@
 		19B27F18713B510784C02530 /* Bibliotheque.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDF0812F9FD73F68A283360 /* Bibliotheque.swift */; };
 		2780F6E4F2245B96D55BFC3E /* Barlow-700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C656599CF2C2DA7C722225E /* Barlow-700.ttf */; };
 		29549ED5692A79AEE41C6C02 /* VueMontre.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF37E1ED09D1191D028CEAD6 /* VueMontre.swift */; };
+		2B2D93532F2BD80860021B01 /* crossfit-seance-type.md in Resources */ = {isa = PBXBuildFile; fileRef = 878BBA4067F49CFF7C0A726B /* crossfit-seance-type.md */; };
 		2F28D4726AB4CCCDFBB60051 /* BigShouldersDisplay-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B61A5262B9AD1C8237FDDF51 /* BigShouldersDisplay-Black.ttf */; };
 		5178943C5C86B1B7140C82F8 /* Barlow-700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C656599CF2C2DA7C722225E /* Barlow-700.ttf */; };
 		5BE65BB8AB15A402480E8244 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90BDB20529EB2902FEE7A30 /* Theme.swift */; };
@@ -75,6 +76,7 @@
 		4CA0D99407A93FB0B74D0A6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		71DC60D5C8CF695E0BBB868A /* 2026-11-19-debutants-dojo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "2026-11-19-debutants-dojo.md"; sourceTree = "<group>"; };
 		7C656599CF2C2DA7C722225E /* Barlow-700.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Barlow-700.ttf"; sourceTree = "<group>"; };
+		878BBA4067F49CFF7C0A726B /* crossfit-seance-type.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "crossfit-seance-type.md"; sourceTree = "<group>"; };
 		88122049AAD5C4416CCBD113 /* Barlow-600.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Barlow-600.ttf"; sourceTree = "<group>"; };
 		8B1C0FABA7B2E243A59F10B5 /* Seance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seance.swift; sourceTree = "<group>"; };
 		8CDF0812F9FD73F68A283360 /* Bibliotheque.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bibliotheque.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				71DC60D5C8CF695E0BBB868A /* 2026-11-19-debutants-dojo.md */,
+				878BBA4067F49CFF7C0A726B /* crossfit-seance-type.md */,
 			);
 			path = Seances;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				CFB19638D4CC7758DA152F71 /* Barlow-600.ttf in Resources */,
 				2780F6E4F2245B96D55BFC3E /* Barlow-700.ttf in Resources */,
 				B73CA49A45A77045FC28FBD1 /* BigShouldersDisplay-Black.ttf in Resources */,
+				2B2D93532F2BD80860021B01 /* crossfit-seance-type.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
