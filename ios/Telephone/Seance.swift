@@ -18,13 +18,27 @@ final class Seance {
     @ObservationIgnored private var dernier = Date()
     @ObservationIgnored private var lien: LienMontre?
     @ObservationIgnored private var cleMontre = ""
+    @ObservationIgnored private let musique: LecteurSeance
+    /// Sections où la musique joue (par défaut celles marquées ♪ dans la fiche).
+    @ObservationIgnored private let sectionsMusique: Set<Int>
+    /// Musique coupée depuis la pause.
+    var musiqueCoupee = false { didSet { synchroniserMusique() } }
+    /// Morceau en cours, affiché dans la pause.
+    private(set) var morceau: Morceau?
+    var volumeMusique: Double { didSet { UserDefaults.standard.set(volumeMusique, forKey: "musVol"); synchroniserMusique() } }
+    @ObservationIgnored private let baisse: Double
 
-    init(cours: Cours, depuisBloc: Int, voix: Bool, voixChaqueRound: Bool) {
+    init(cours: Cours, depuisBloc: Int, voix: Bool, voixChaqueRound: Bool, playlist: Playlist, sectionsMusique: Set<Int>) {
         var c = Chrono(cours: cours, depuisBloc: depuisBloc)
         c.voixChaqueRound = voixChaqueRound
         chrono = c
         etat = c.etat
         sons.voixActive = voix
+        musique = playlist.lecteur()
+        self.sectionsMusique = sectionsMusique
+        let d = UserDefaults.standard
+        volumeMusique = d.object(forKey: "musVol") as? Double ?? 0.8
+        baisse = (d.object(forKey: "musBas") as? Double ?? 20) / 100
         lien = LienMontre { [weak self] cmd in self?.commande(cmd) }
     }
 
@@ -43,6 +57,7 @@ final class Seance {
 
     func quitter() {
         minuterie?.invalidate(); minuterie = nil
+        musique.arreter()
         sons.arreter()
         lien?.finir()
         UIApplication.shared.isIdleTimerDisabled = false
@@ -55,7 +70,34 @@ final class Seance {
         // Plus d'une seconde d'écart : retour de veille, on rattrape sans sons.
         jouer(chrono.avancer(dt, silencieux: dt > 1.5))
         if miRound != nil, maintenant > finMiRound { miRound = nil }
+        synchroniserMusique()
         publier(important: false)
+    }
+
+    // MARK: Musique
+
+    /// La section du bloc en cours a-t-elle de la musique ?
+    /// Le curseur de volume de l'app agit (fichiers importés, pas la playlist Musique).
+    var volumeReglable: Bool { musique.regleVolume }
+
+    var musiquePrevue: Bool { musique.disponible && sectionsMusique.contains(chrono.bloc.section) }
+
+    /// Baisse pendant la voix et les consignes, comme l'app web.
+    var musiqueBaissee: Bool { sons.voixEnCours || chrono.segment.sequence.type == .consigne }
+
+    private func synchroniserMusique() {
+        let voulue = musiquePrevue && !musiqueCoupee && chrono.enMarche && !chrono.termine
+        if chrono.termine { musique.arreter() }
+        else if !chrono.enMarche { musique.suspendre() }
+        else { musique.synchroniser(voulue: voulue, niveau: Float(volumeMusique * (musiqueBaissee ? baisse : 1))) }
+        if !musique.regleVolume { sons.attenuer(voulue && musiqueBaissee) }
+        if morceau != musique.courant { morceau = musique.courant }
+    }
+
+    func morceauSuivant() {
+        musiqueCoupee = false
+        musique.suivant()
+        morceau = musique.courant
     }
 
     private func jouer(_ ev: [Evenement]) {
@@ -74,8 +116,11 @@ final class Seance {
     }
 
     private func publier(important: Bool) {
-        etat = chrono.etat
-        let cle = "\(chrono.index)|\(etat.enMarche)|\(etat.termine)|\(Int(etat.dureeSequence))"
+        var e = chrono.etat
+        e.musiquePrevue = musiquePrevue
+        e.musiqueCoupee = musiqueCoupee
+        etat = e
+        let cle = "\(chrono.index)|\(etat.enMarche)|\(etat.termine)|\(Int(etat.dureeSequence))|\(e.musiquePrevue)|\(e.musiqueCoupee)"
         let change = cle != cleMontre
         cleMontre = cle
         // Une fois par seconde suffit : la montre décompte seule entre deux messages.
@@ -86,7 +131,7 @@ final class Seance {
 
     // MARK: Commandes (écran pause ou montre)
 
-    func pause() { chrono.pause(); feuillePause = true; publier(important: true) }
+    func pause() { chrono.pause(); feuillePause = true; synchroniserMusique(); publier(important: true) }
     func reprendre() { chrono.reprendre(); feuillePause = false; dernier = Date(); sons.demarrer(); publier(important: true) }
     func revenir() { chrono.revenir(); publier(important: true) }
     func passer() { jouer(chrono.passer()); publier(important: true) }
@@ -100,6 +145,8 @@ final class Seance {
         case .passer: passer()
         case .plus30: ajuster(30)
         case .moins30: ajuster(-30)
+        case .couperMusique: musiqueCoupee = true; publier(important: true)
+        case .remettreMusique: musiqueCoupee = false; publier(important: true)
         }
     }
 }

@@ -24,6 +24,8 @@ final class LienTelephone {
             switch c {
             case .pause: e.restant = e.restant(a: maintenant); e.enMarche = false
             case .reprendre: e.enMarche = true
+            case .couperMusique: e.musiqueCoupee = true
+            case .remettreMusique: e.musiqueCoupee = false
             default: break
             }
             e.horodatage = maintenant.timeIntervalSince1970
@@ -31,6 +33,15 @@ final class LienTelephone {
         }
         relais?.envoyer(Lien.message(c))
     }
+
+    /// Redemande l'état à l'iPhone : au retour sur l'app, ou quand l'affichage semble dépassé.
+    func resynchroniser() {
+        let maintenant = Date()
+        guard maintenant.timeIntervalSince(derniereDemande) > 2 else { return }
+        derniereDemande = maintenant
+        relais?.demander()
+    }
+    @ObservationIgnored private var derniereDemande = Date.distantPast
 }
 
 /// Délégué WatchConnectivity (hors acteur principal).
@@ -52,6 +63,17 @@ private final class Relais: NSObject, WCSessionDelegate, @unchecked Sendable {
         else { s.transferUserInfo(m) }
     }
 
+    /// Demande l'état courant ; à défaut d'iPhone joignable, relit le dernier contexte reçu.
+    func demander() {
+        let s = WCSession.default
+        guard s.activationState == .activated else { return }
+        if s.isReachable {
+            s.sendMessage([Lien.cleDemande: true], replyHandler: { [weak self] r in self?.recevoir(r) }, errorHandler: nil)
+        } else {
+            recevoir(s.receivedApplicationContext)
+        }
+    }
+
     private func recevoir(_ m: [String: Any]) {
         if m[Lien.cleRepos] != nil { let f = surEtat; Task { @MainActor in f(nil) }; return }
         guard let e = Lien.etat(depuis: m) else { return }
@@ -63,10 +85,12 @@ private final class Relais: NSObject, WCSessionDelegate, @unchecked Sendable {
         recevoir(session.receivedApplicationContext)
         let j = session.isReachable, f = surJoignable
         Task { @MainActor in f(j) }
+        if j { demander() }
     }
     func sessionReachabilityDidChange(_ session: WCSession) {
         let j = session.isReachable, f = surJoignable
         Task { @MainActor in f(j) }
+        if j { demander() }
     }
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) { recevoir(message) }
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) { recevoir(applicationContext) }

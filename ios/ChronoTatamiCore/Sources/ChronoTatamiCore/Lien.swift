@@ -5,6 +5,7 @@ public enum Lien {
     public static let cleEtat = "etat"
     public static let cleCommande = "commande"
     public static let cleRepos = "repos"          // aucune séance en cours
+    public static let cleDemande = "demande"      // la montre redemande l'état (retour de veille)
 
     public static func message(_ etat: EtatChrono) -> [String: Any] {
         guard let d = try? JSONEncoder().encode(etat) else { return [:] }

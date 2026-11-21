@@ -15,8 +15,11 @@
 		2F28D4726AB4CCCDFBB60051 /* BigShouldersDisplay-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B61A5262B9AD1C8237FDDF51 /* BigShouldersDisplay-Black.ttf */; };
 		5178943C5C86B1B7140C82F8 /* Barlow-700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C656599CF2C2DA7C722225E /* Barlow-700.ttf */; };
 		5BE65BB8AB15A402480E8244 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90BDB20529EB2902FEE7A30 /* Theme.swift */; };
+		5C104D99C4E34B03DFB39E03 /* AppleMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE79BAC4C0C29860EF93570B /* AppleMusic.swift */; };
 		6771C068A816C5F78EEB9FA9 /* ChronoTatamiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304294BD127B41CFE1183D01 /* ChronoTatamiApp.swift */; };
 		6D56B3D90ED0323F96E94B3B /* ChronoMontreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B06EC9A90ADF9A3FF2D387D /* ChronoMontreApp.swift */; };
+		72D8544D42639845479D8AD8 /* Musique.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FAAC1DB8365E1BF124747E /* Musique.swift */; };
+		75DC15B86B965DA867E53E09 /* VuePlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F001D28E40A9816E86607 /* VuePlaylist.swift */; };
 		80998EB63C01254BC46EE6A3 /* VueCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367404E7299BAD99B675BE10 /* VueCourse.swift */; };
 		88EE2BF9D3742C9386850217 /* LienTelephone.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C8F48B8282962D7D190E9B /* LienTelephone.swift */; };
 		8A9FA6BA0F54AB3004D1768B /* 2026-11-19-debutants-dojo.md in Resources */ = {isa = PBXBuildFile; fileRef = 71DC60D5C8CF695E0BBB868A /* 2026-11-19-debutants-dojo.md */; };
@@ -58,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		0B06EC9A90ADF9A3FF2D387D /* ChronoMontreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChronoMontreApp.swift; sourceTree = "<group>"; };
+		1A9F001D28E40A9816E86607 /* VuePlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuePlaylist.swift; sourceTree = "<group>"; };
 		1AA75B76B51F009C81232886 /* ChronoTatami.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ChronoTatami.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		232ACC5AF45607AC03CAD7B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		29FCD2DA287FAEE29FA1E51D /* ChronoTatamiMontre.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChronoTatamiMontre.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +82,8 @@
 		C90BDB20529EB2902FEE7A30 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		D2D9C209DDC9FE2BE6E8609B /* ChronoTatamiCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ChronoTatamiCore; path = ChronoTatamiCore; sourceTree = SOURCE_ROOT; };
 		D416796D45531EB71FC8E493 /* VuePrep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuePrep.swift; sourceTree = "<group>"; };
+		EE79BAC4C0C29860EF93570B /* AppleMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusic.swift; sourceTree = "<group>"; };
+		F6FAAC1DB8365E1BF124747E /* Musique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Musique.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,14 +128,17 @@
 		49956E6B0656F8F9F057EE7B /* Telephone */ = {
 			isa = PBXGroup;
 			children = (
+				EE79BAC4C0C29860EF93570B /* AppleMusic.swift */,
 				8CDF0812F9FD73F68A283360 /* Bibliotheque.swift */,
 				304294BD127B41CFE1183D01 /* ChronoTatamiApp.swift */,
 				232ACC5AF45607AC03CAD7B9 /* Info.plist */,
 				904C0EEE2DFD67AA91116A18 /* LienMontre.swift */,
 				4186861D232C5FA0F559F5C9 /* ListeSeances.swift */,
+				F6FAAC1DB8365E1BF124747E /* Musique.swift */,
 				8B1C0FABA7B2E243A59F10B5 /* Seance.swift */,
 				A7F460D16CE178D0917CFD87 /* Sons.swift */,
 				367404E7299BAD99B675BE10 /* VueCourse.swift */,
+				1A9F001D28E40A9816E86607 /* VuePlaylist.swift */,
 				D416796D45531EB71FC8E493 /* VuePrep.swift */,
 				01A97CD6B92BBD715E8D1D27 /* Ressources */,
 			);
@@ -246,11 +255,11 @@
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					87D50DBB674DA09FDB613E2E = {
-						DevelopmentTeam = "";
+						DevelopmentTeam = 25K42GMTD6;
 						ProvisioningStyle = Automatic;
 					};
 					8B9423992A1D15B0591F4A83 = {
-						DevelopmentTeam = "";
+						DevelopmentTeam = 25K42GMTD6;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -318,14 +327,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C104D99C4E34B03DFB39E03 /* AppleMusic.swift in Sources */,
 				19B27F18713B510784C02530 /* Bibliotheque.swift in Sources */,
 				6771C068A816C5F78EEB9FA9 /* ChronoTatamiApp.swift in Sources */,
 				D83A68F852E2D8684CB7F6D8 /* LienMontre.swift in Sources */,
 				ACDA565402C4273F7AB9DB9A /* ListeSeances.swift in Sources */,
+				72D8544D42639845479D8AD8 /* Musique.swift in Sources */,
 				DE94B3A371B40C86262D7F2E /* Seance.swift in Sources */,
 				D9F0900CF198A78710F1628F /* Sons.swift in Sources */,
 				5BE65BB8AB15A402480E8244 /* Theme.swift in Sources */,
 				80998EB63C01254BC46EE6A3 /* VueCourse.swift in Sources */,
+				75DC15B86B965DA867E53E09 /* VuePlaylist.swift in Sources */,
 				8CB9CEB5FDAF1C951FAD0B51 /* VuePrep.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,7 +390,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 25K42GMTD6;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -500,7 +512,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 25K42GMTD6;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

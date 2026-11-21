@@ -181,6 +181,7 @@ struct VuePause: View {
                 bouton("Revenir", "backward.end.fill") { seance.revenir() }
                 bouton("Passer", "forward.end.fill") { seance.passer() }
             }
+            if seance.musiquePrevue { musique }
             Button { seance.reprendre() } label: {
                 Label("Reprendre", systemImage: "play.fill")
                     .font(Theme.affiche(30)).textCase(.uppercase)
@@ -192,6 +193,26 @@ struct VuePause: View {
                 .confirmationDialog("Terminer la séance ?", isPresented: $confirmer, titleVisibility: .visible) {
                     Button("Terminer", role: .destructive) { quitter() }
                 }
+        }
+    }
+
+    private var musique: some View {
+        VStack(spacing: 8) {
+            if let m = seance.morceau, !seance.musiqueCoupee {
+                Text("♪ " + m.nom + (m.artiste.isEmpty ? "" : " · " + m.artiste))
+                    .font(Theme.texte(15)).foregroundStyle(Theme.attenue).lineLimit(1)
+            }
+            HStack(spacing: 12) {
+                bouton(seance.musiqueCoupee ? "Remettre" : "Couper", seance.musiqueCoupee ? "speaker.wave.2.fill" : "speaker.slash.fill") {
+                    seance.musiqueCoupee.toggle()
+                }
+                bouton("Morceau suivant", "forward.fill") { seance.morceauSuivant() }
+            }
+            if seance.volumeReglable { HStack(spacing: 10) {
+                Image(systemName: "speaker.fill").foregroundStyle(Theme.discret)
+                Slider(value: Binding(get: { seance.volumeMusique }, set: { seance.volumeMusique = $0 }), in: 0...1)
+                Image(systemName: "speaker.wave.3.fill").foregroundStyle(Theme.discret)
+            } }
         }
     }
 

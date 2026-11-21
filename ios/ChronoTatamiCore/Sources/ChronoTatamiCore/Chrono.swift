@@ -203,6 +203,9 @@ public struct EtatChrono: Codable, Sendable, Equatable {
     public var dureeSuivant: Int
     /// Moment de l'envoi : la montre en déduit le temps restant sans attendre le message suivant.
     public var horodatage: Double
+    /// Musique prévue sur la section en cours, et coupée ou non (bouton de la montre).
+    public var musiquePrevue = false
+    public var musiqueCoupee = false
 
     public var progressionSequence: Double { dureeSequence > 0 ? 1 - restant / dureeSequence : 0 }
 
@@ -214,7 +217,7 @@ public struct EtatChrono: Codable, Sendable, Equatable {
 
 /// Commandes envoyées par la montre à l'iPhone.
 public enum CommandeMontre: String, Codable, Sendable {
-    case pause, reprendre, revenir, passer, plus30, moins30
+    case pause, reprendre, revenir, passer, plus30, moins30, couperMusique, remettreMusique
 }
 
 /// « 1:05 », « 0:09 »

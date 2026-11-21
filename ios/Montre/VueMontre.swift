@@ -31,10 +31,18 @@ struct VueMontre: View {
         let coul = e.enMarche ? Theme.couleur(e.famille) : Theme.discret
         let s = Int(ceil(restant))
         return VStack(alignment: .leading, spacing: 3) {
-            Text(formatChrono(restant))
-                .font(Theme.affiche(52)).monospacedDigit()
-                .foregroundStyle(e.enMarche ? Theme.couleur(e.famille) : Theme.texte)
-                .lineLimit(1).minimumScaleFactor(0.6)
+            HStack(alignment: .center, spacing: 4) {
+                Text(formatChrono(restant))
+                    .font(Theme.affiche(52)).monospacedDigit()
+                    .foregroundStyle(e.enMarche ? Theme.couleur(e.famille) : Theme.texte)
+                    .lineLimit(1).minimumScaleFactor(0.6)
+                if e.musiquePrevue {
+                    Spacer(minLength: 0)
+                    rond(e.musiqueCoupee ? "speaker.slash.fill" : "speaker.wave.2.fill", taille: 34) {
+                        lien.envoyer(e.musiqueCoupee ? .remettreMusique : .couperMusique)
+                    }
+                }
+            }
             Text((e.enMarche ? "" : "En pause · ") + sousTitre(e))
                 .font(Theme.texte(14, gras: true)).lineLimit(1)
             GeometryReader { g in
@@ -64,6 +72,8 @@ struct VueMontre: View {
         .foregroundStyle(Theme.texte)
         .onChange(of: s) { _, v in
             if e.enMarche, (1...3).contains(v), v != dernierBip { dernierBip = v; WKInterfaceDevice.current().play(.click) }
+            // Arrivé à zéro sans nouvel état : on a sans doute raté des messages, on redemande.
+            if e.enMarche, v <= 0 { lien.resynchroniser() }
         }
     }
 

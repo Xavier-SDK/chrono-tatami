@@ -23,10 +23,31 @@ final class Sons {
 
     func demarrer() {
         let s = AVAudioSession.sharedInstance()
-        try? s.setCategory(.playback, mode: .spokenAudio, options: [.mixWithOthers, .duckOthers])
+        try? s.setCategory(.playback, mode: .default, options: [.mixWithOthers])
         try? s.setActive(true)
+        attenue = false
         if !moteur.isRunning { try? moteur.start() }
         if !lecteur.isPlaying { lecteur.play() }
+    }
+
+    /// Atténue la musique des autres lecteurs (playlist Musique, autre app) pendant la voix et les consignes.
+    /// iOS n'applique le retour au volume normal qu'en désactivant la session : on suspend le moteur le temps de le faire.
+    private var attenue = false
+    func attenuer(_ oui: Bool) {
+        guard oui != attenue else { return }
+        attenue = oui
+        let s = AVAudioSession.sharedInstance()
+        if oui {
+            try? s.setCategory(.playback, mode: .default, options: [.mixWithOthers, .duckOthers])
+            try? s.setActive(true)
+        } else {
+            moteur.pause()
+            try? s.setActive(false, options: .notifyOthersOnDeactivation)
+            try? s.setCategory(.playback, mode: .default, options: [.mixWithOthers])
+            try? s.setActive(true)
+            try? moteur.start()
+            if !lecteur.isPlaying { lecteur.play() }
+        }
     }
 
     func arreter() {
