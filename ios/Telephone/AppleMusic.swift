@@ -23,14 +23,10 @@ enum BibliothequeMusique {
             .sorted { $0.nom.localizedCompare($1.nom) == .orderedAscending }
     }
 
-    static func requete(_ p: PlaylistApple) -> MPMediaQuery {
+    static func titres(_ p: PlaylistApple) -> [MPMediaItem] {
         let q = MPMediaQuery.playlists()
         q.addFilterPredicate(MPMediaPropertyPredicate(value: NSNumber(value: p.id), forProperty: MPMediaPlaylistPropertyPersistentID))
-        return q
-    }
-
-    static func titres(_ p: PlaylistApple) -> [MPMediaItem] {
-        requete(p).collections?.first?.items ?? []
+        return q.collections?.first?.items ?? []
     }
 }
 
@@ -38,15 +34,10 @@ enum BibliothequeMusique {
 /// iOS ne laisse pas l'app régler ce volume : la baisse pendant la voix passe par l'atténuation d'iOS (voir `Sons.attenuer`).
 @MainActor
 final class LecteurAppleMusic: LecteurSeance {
-    /// Lecteur propre à l'app : il ne touche pas à la file de l'app Musique.
-    /// Attention : iOS coupe le son des titres Apple Music (protégés) tant que l'écran de l'iPhone est
-    /// enregistré ou partagé (recopie, Xcode, enregistrement d'écran). L'app n'y peut rien.
     private let lecteur = MPMusicPlayerController.applicationQueuePlayer
-    private let systeme = false
     private let playlist: PlaylistApple
     private let aleatoire: Bool
-    private enum Etat { case vide, chargement, pret, echec }
-    private var etat = Etat.vide
+    private var pret = false
     private var actif = false
     let regleVolume = false
 
@@ -58,87 +49,39 @@ final class LecteurAppleMusic: LecteurSeance {
     var disponible: Bool { MPMediaLibrary.authorizationStatus() == .authorized }
 
     var courant: Morceau? {
-        guard etat == .pret, let m = lecteur.nowPlayingItem else { return nil }
+        guard pret, let m = lecteur.nowPlayingItem else { return nil }
         return Morceau(id: String(m.persistentID), nom: m.title ?? "", artiste: m.artist ?? "", duree: m.playbackDuration)
     }
 
-    private(set) var probleme: String?
-
-    /// Charge la file une seule fois. Rien n'est lancé tant que le lecteur n'a pas confirmé :
-    /// des play() en rafale sur une file refusée bloquaient le son de tout l'iPhone.
-    private func preparer() {
-        guard etat == .vide else { return }
-        guard disponible else {
-            probleme = "Accès à la bibliothèque refusé : Réglages > Apps > Chrono Tatami > Musique et médias."
-            etat = .echec
-            return
-        }
-        let tous = BibliothequeMusique.titres(playlist)
-        guard !tous.isEmpty else {
-            probleme = "Playlist « \(playlist.nom) » introuvable ou vide. Choisis-la à nouveau."
-            etat = .echec
-            return
-        }
-        titres = tous
-        etat = .chargement
-        charger()
-    }
-    private var titres: [MPMediaItem] = []
-
-    private func charger() {
-        print("[Musique] charger (\(systeme ? "app Musique" : "app")) \(playlist.nom)")
-        lecteur.setQueue(with: MPMediaItemCollection(items: titres))
+    private func preparer() -> Bool {
+        if pret { return true }
+        let items = BibliothequeMusique.titres(playlist)
+        guard !items.isEmpty else { return false }
+        lecteur.setQueue(with: MPMediaItemCollection(items: items))
         lecteur.shuffleMode = aleatoire ? .songs : .off
         lecteur.repeatMode = .all
-        lecteur.prepareToPlay { [weak self] erreur in
-            Task { @MainActor in self?.charge(erreur) }
-        }
+        lecteur.prepareToPlay()
+        pret = true
+        return true
     }
-
-    private func charge(_ erreur: Error?) {
-        guard etat == .chargement else { return }
-        if let erreur {
-            print("[Musique] prepareToPlay (\(systeme ? "app Musique" : "app")) : \(erreur)")
-            probleme = "L'app Musique refuse de lire cette playlist (\(erreur.localizedDescription)). Vérifie qu'elle se lit dans l'app Musique."
-            etat = .echec
-            return
-        }
-        print("[Musique] prêt (\(systeme ? "app Musique" : "app")), actif=\(actif)")
-        etat = .pret
-        if actif { lecteur.play() }
-    }
-
-    /// Dernière relance, pour ne pas solliciter le lecteur à chaque dixième de seconde.
-    private var relance = Date.distantPast
 
     func synchroniser(voulue: Bool, niveau: Float) {
-        guard voulue else { suspendre(); return }
-        preparer()
-        guard etat == .pret else { actif = etat == .chargement; return }
-        if !actif {
+        if voulue {
+            guard !actif, preparer() else { return }
             actif = true
-            relance = Date()
-            print("[Musique] play (début)")
             lecteur.play()
-        } else if lecteur.playbackState == .paused || lecteur.playbackState == .stopped,
-                  Date().timeIntervalSince(relance) > 3 {
-            // iOS met le lecteur en pause quand l'app rend la main sur l'audio (fin d'atténuation,
-            // relance du coach, interruption) : on le relance tant que la section a de la musique.
-            relance = Date()
-            print("[Musique] play (relance, état \(lecteur.playbackState.rawValue))")
-            lecteur.play()
-        }
+        } else { suspendre() }
     }
 
     func suspendre() {
-        let avait = actif
+        let jouait = lecteur.playbackState == .playing
+        guard actif || (pret && jouait) else { return }
         actif = false
-        guard etat == .pret, avait || lecteur.playbackState == .playing else { return }
         lecteur.pause()
     }
 
     func suivant() {
-        guard etat == .pret else { return }
+        guard preparer() else { return }
         lecteur.skipToNextItem()
         // Hors section avec musique, passer au morceau suivant ne doit pas relancer la lecture.
         if !actif { lecteur.pause() }
@@ -146,10 +89,7 @@ final class LecteurAppleMusic: LecteurSeance {
 
     func arreter() {
         actif = false
-        if etat == .pret || etat == .chargement {
-            // Le lecteur de l'app Musique continuerait après la séance : on l'arrête aussi.
-            lecteur.stop()
-        }
+        if pret { lecteur.stop() }
     }
 }
 

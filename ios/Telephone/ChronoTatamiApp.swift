@@ -1,5 +1,3 @@
-import AVFoundation
-import MediaPlayer
 import ChronoTatamiCore
 import SwiftUI
 
@@ -7,21 +5,6 @@ import SwiftUI
 struct ChronoTatamiApp: App {
     @State private var bibliotheque = Bibliotheque()
     @State private var playlist = Playlist()
-
-    init() {
-        // Journal audio (console de l'iPhone) : interruptions, changements de sortie, redémarrage des services média.
-        let c = NotificationCenter.default
-        for n in [AVAudioSession.interruptionNotification, AVAudioSession.routeChangeNotification,
-                  AVAudioSession.mediaServicesWereLostNotification, AVAudioSession.mediaServicesWereResetNotification,
-                  AVAudioSession.silenceSecondaryAudioHintNotification] {
-            c.addObserver(forName: n, object: nil, queue: .main) { print("[Audio] \($0.name.rawValue) \($0.userInfo ?? [:])") }
-        }
-        c.addObserver(forName: .MPMusicPlayerControllerPlaybackStateDidChange, object: nil, queue: .main) { n in
-            print("[Musique] état \((n.object as? MPMusicPlayerController)?.playbackState.rawValue ?? -1)")
-        }
-        MPMusicPlayerController.applicationQueuePlayer.beginGeneratingPlaybackNotifications()
-        MPMusicPlayerController.systemMusicPlayer.beginGeneratingPlaybackNotifications()
-    }
 
     var body: some Scene {
         WindowGroup {
