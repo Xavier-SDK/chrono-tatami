@@ -135,7 +135,11 @@ struct VueCourse: View {
             ZStack(alignment: .topLeading) {
                 fond
                 if e.type == .repos {
-                    Rectangle().fill(Theme.graphite).frame(width: g.size.width * p)
+                    // Repos : remplissage hachuré en diagonale, bord de la couleur de la phase (comme l'app web).
+                    Hachures(couleur: coul)
+                        .frame(width: g.size.width * p)
+                        .overlay(alignment: .trailing) { Rectangle().fill(coul).frame(width: 4) }
+                        .clipped()
                 }
                 chiffres.foregroundStyle(encre).frame(maxWidth: .infinity, maxHeight: .infinity).padding(.top, 30)
                 if e.type == .travail {
@@ -314,5 +318,37 @@ struct VueFin: View {
         }
         .foregroundStyle(Theme.texte)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+extension Hachures {
+    /// Mélange de deux couleurs 0xRRGGBB (comme color-mix en CSS), compatible iOS 17.
+    static func melange(_ a: UInt32, _ b: UInt32, _ t: Double) -> Color {
+        func c(_ v: UInt32, _ d: UInt32) -> Double { Double((v >> d) & 0xFF) }
+        func m(_ d: UInt32) -> UInt32 { UInt32((c(a, d) * (1 - t) + c(b, d) * t).rounded()) << d }
+        return Color(hex: m(16) | m(8) | m(0))
+    }
+}
+
+/// Bandes diagonales à −45° : couleur de la phase mêlée au noir (26 %), en alternance avec le noir.
+struct Hachures: View {
+    let couleur: Color
+    var body: some View {
+        Canvas { ctx, taille in
+            ctx.fill(Path(CGRect(origin: .zero, size: taille)), with: .color(Theme.encre))
+            let bande: CGFloat = 22 * 2.squareRoot()   // largeur horizontale d'une bande de 22 pt à 45°
+            let teinte = Hachures.melange(Theme.encre.hex, couleur.hex, 0.26)
+            var x: CGFloat = -taille.height
+            while x < taille.width + taille.height {
+                var b = Path()
+                b.move(to: CGPoint(x: x + taille.height, y: 0))
+                b.addLine(to: CGPoint(x: x + taille.height + bande, y: 0))
+                b.addLine(to: CGPoint(x: x + bande, y: taille.height))
+                b.addLine(to: CGPoint(x: x, y: taille.height))
+                b.closeSubpath()
+                ctx.fill(b, with: .color(teinte))
+                x += bande * 2
+            }
+        }
     }
 }
