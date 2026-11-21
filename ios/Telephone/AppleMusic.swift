@@ -38,10 +38,12 @@ enum BibliothequeMusique {
 /// iOS ne laisse pas l'app régler ce volume : la baisse pendant la voix passe par l'atténuation d'iOS (voir `Sons.attenuer`).
 @MainActor
 final class LecteurAppleMusic: LecteurSeance {
-    /// Lecteur propre à l'app d'abord. S'il refuse les titres Apple Music non téléchargés (erreur
-    /// « capacité du service cloud manquante »), on passe par le lecteur de l'app Musique, qui les lit toujours.
-    private var lecteur: MPMusicPlayerController = MPMusicPlayerController.applicationQueuePlayer
-    private var systeme = false
+    /// Lecteur propre à l'app : il ne touche pas à la file de l'app Musique.
+    /// Seuls les titres téléchargés sur l'iPhone sont mis en file : un titre Apple Music resté dans le nuage
+    /// ne se charge pas depuis une app tierce, et le lecteur restait bloqué dessus, muet, ce qui coupait aussi
+    /// l'app Musique (même service de lecture) jusqu'au redémarrage de l'iPhone.
+    private let lecteur = MPMusicPlayerController.applicationQueuePlayer
+    private let systeme = false
     private let playlist: PlaylistApple
     private let aleatoire: Bool
     private enum Etat { case vide, chargement, pret, echec }
@@ -72,17 +74,30 @@ final class LecteurAppleMusic: LecteurSeance {
             etat = .echec
             return
         }
-        guard !BibliothequeMusique.titres(playlist).isEmpty else {
+        let tous = BibliothequeMusique.titres(playlist)
+        guard !tous.isEmpty else {
             probleme = "Playlist « \(playlist.nom) » introuvable ou vide. Choisis-la à nouveau."
             etat = .echec
             return
         }
+        titres = tous.filter { !$0.isCloudItem }
+        let manquants = tous.count - titres.count
+        guard !titres.isEmpty else {
+            probleme = "Aucun titre de « \(playlist.nom) » n'est téléchargé sur l'iPhone. Dans l'app Musique, ouvre la playlist et touche Télécharger."
+            etat = .echec
+            return
+        }
+        if manquants > 0 {
+            probleme = "\(manquants) titre\(manquants > 1 ? "s" : "") sur \(tous.count) non téléchargé\(manquants > 1 ? "s" : "") : \(manquants > 1 ? "ils sont ignorés" : "il est ignoré"). Télécharge la playlist dans l'app Musique."
+        }
         etat = .chargement
         charger()
     }
+    private var titres: [MPMediaItem] = []
 
     private func charger() {
-        lecteur.setQueue(with: BibliothequeMusique.requete(playlist))
+        print("[Musique] charger (\(systeme ? "app Musique" : "app")) \(playlist.nom)")
+        lecteur.setQueue(with: MPMediaItemCollection(items: titres))
         lecteur.shuffleMode = aleatoire ? .songs : .off
         lecteur.repeatMode = .all
         lecteur.prepareToPlay { [weak self] erreur in
@@ -94,18 +109,11 @@ final class LecteurAppleMusic: LecteurSeance {
         guard etat == .chargement else { return }
         if let erreur {
             print("[Musique] prepareToPlay (\(systeme ? "app Musique" : "app")) : \(erreur)")
-            if !systeme {
-                lecteur.stop()
-                lecteur = MPMusicPlayerController.systemMusicPlayer
-                systeme = true
-                charger()
-                return
-            }
             probleme = "L'app Musique refuse de lire cette playlist (\(erreur.localizedDescription)). Vérifie qu'elle se lit dans l'app Musique."
             etat = .echec
             return
         }
-        probleme = nil
+        print("[Musique] prêt (\(systeme ? "app Musique" : "app")), actif=\(actif)")
         etat = .pret
         if actif { lecteur.play() }
     }
@@ -120,12 +128,14 @@ final class LecteurAppleMusic: LecteurSeance {
         if !actif {
             actif = true
             relance = Date()
+            print("[Musique] play (début)")
             lecteur.play()
         } else if lecteur.playbackState == .paused || lecteur.playbackState == .stopped,
                   Date().timeIntervalSince(relance) > 3 {
             // iOS met le lecteur en pause quand l'app rend la main sur l'audio (fin d'atténuation,
             // relance du coach, interruption) : on le relance tant que la section a de la musique.
             relance = Date()
+            print("[Musique] play (relance, état \(lecteur.playbackState.rawValue))")
             lecteur.play()
         }
     }
