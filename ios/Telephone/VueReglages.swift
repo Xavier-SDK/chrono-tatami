@@ -14,6 +14,7 @@ struct VueReglages: View {
     @AppStorage("veille") private var veille = true
     @AppStorage("test") private var test = false
     @State private var voirPlaylist = false
+    private let palette = Palette.partagee
 
     var body: some View {
         @Bindable var playlist = playlist
@@ -64,13 +65,18 @@ struct VueReglages: View {
                         Text("Pour tester une séance en quelques minutes")
                     }
                 }
-                Section("Couleurs des phases") {
+                Section {
                     ForEach(Famille.allCases, id: \.self) { f in
-                        HStack(spacing: 12) {
-                            Circle().fill(Theme.couleur(f)).frame(width: 14, height: 14)
-                            Text(Self.nom(f))
-                        }
+                        ColorPicker(Self.nom(f), selection: Binding(
+                            get: { Theme.couleur(f) },
+                            set: { palette.definir(f, $0.hex) }
+                        ), supportsOpacity: false)
                     }
+                    if palette.modifiee {
+                        Button("Rétablir les couleurs d'origine") { palette.retablir() }
+                    }
+                } header: { Text("Couleurs des phases") } footer: {
+                    Text("Utilisées sur l'iPhone et la montre.")
                 }
                 Section {} footer: {
                     Text("Chrono Tatami \(Self.version)").frame(maxWidth: .infinity)

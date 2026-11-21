@@ -206,12 +206,16 @@ public struct EtatChrono: Codable, Sendable, Equatable {
     /// Musique prévue sur la section en cours, et coupée ou non (bouton de la montre).
     public var musiquePrevue = false
     public var musiqueCoupee = false
+    /// Vitesse du chrono (10 en mode essai) : la montre décompte au même rythme que l'iPhone.
+    public var vitesse: Double = 1
+    /// Couleur de la phase choisie dans les réglages (0xRRGGBB), sinon celle par défaut.
+    public var couleur: UInt32?
 
     public var progressionSequence: Double { dureeSequence > 0 ? 1 - restant / dureeSequence : 0 }
 
     /// Temps restant estimé à l'instant `maintenant` (la montre continue de décompter entre deux messages).
     public func restant(a maintenant: Date) -> Double {
-        enMarche ? max(0, restant - (maintenant.timeIntervalSince1970 - horodatage)) : restant
+        enMarche ? max(0, restant - (maintenant.timeIntervalSince1970 - horodatage) * vitesse) : restant
     }
 }
 

@@ -31,7 +31,7 @@ final class Seance {
     @ObservationIgnored private let bips: Bool
     @ObservationIgnored private let gong: Bool
     @ObservationIgnored private let ecranAllume: Bool
-    @ObservationIgnored private let vitesse: Double
+    @ObservationIgnored let vitesse: Double
 
     init(cours: Cours, depuisBloc: Int, voix: Bool, voixChaqueRound: Bool, playlist: Playlist, sectionsMusique: Set<Int>) {
         var c = Chrono(cours: cours, depuisBloc: depuisBloc)
@@ -89,13 +89,27 @@ final class Seance {
     /// Le curseur de volume de l'app agit (fichiers importés, pas la playlist Musique).
     var volumeReglable: Bool { musique.regleVolume }
 
+    /// La séance a de la musique sur au moins une section (commandes de la pause, comme l'app web).
+    var musiqueDansLaSeance: Bool { musique.disponible && !sectionsMusique.isEmpty }
+
     var musiquePrevue: Bool { musique.disponible && sectionsMusique.contains(chrono.bloc.section) }
 
     /// Baisse pendant la voix et les consignes, comme l'app web.
     var musiqueBaissee: Bool { sons.voixEnCours || chrono.segment.sequence.type == .consigne }
 
+    /// Musique de la section qui doit jouer en ce moment.
+    var musiqueVoulue: Bool { musiquePrevue && !musiqueCoupee && chrono.enMarche && !chrono.termine }
+
+    /// Pastille du haut de l'écran, comme l'app web : « ♪ 80 % · voix ».
+    var indicateurMusique: (texte: String, baissee: Bool)? {
+        guard musiqueVoulue else { return nil }
+        let raison = musiqueBaissee ? (sons.voixEnCours ? " · voix" : " · consigne") : ""
+        if !musique.regleVolume { return ("♪" + raison, musiqueBaissee) }
+        return ("♪ \(Int((volumeMusique * (musiqueBaissee ? baisse : 1) * 100).rounded())) %" + raison, musiqueBaissee)
+    }
+
     private func synchroniserMusique() {
-        let voulue = musiquePrevue && !musiqueCoupee && chrono.enMarche && !chrono.termine
+        let voulue = musiqueVoulue
         if chrono.termine { musique.arreter() }
         else if !chrono.enMarche { musique.suspendre() }
         else { musique.synchroniser(voulue: voulue, niveau: Float(volumeMusique * (musiqueBaissee ? baisse : 1))) }
@@ -128,6 +142,8 @@ final class Seance {
         var e = chrono.etat
         e.musiquePrevue = musiquePrevue
         e.musiqueCoupee = musiqueCoupee
+        e.vitesse = vitesse
+        e.couleur = Palette.partagee.hex(chrono.bloc.famille)
         etat = e
         let cle = "\(chrono.index)|\(etat.enMarche)|\(etat.termine)|\(Int(etat.dureeSequence))|\(e.musiquePrevue)|\(e.musiqueCoupee)"
         let change = cle != cleMontre

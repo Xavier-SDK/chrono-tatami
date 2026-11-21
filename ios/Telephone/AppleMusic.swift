@@ -74,7 +74,8 @@ final class LecteurAppleMusic: LecteurSeance {
     }
 
     func suspendre() {
-        guard actif else { return }
+        let jouait = lecteur.playbackState == .playing
+        guard actif || (pret && jouait) else { return }
         actif = false
         lecteur.pause()
     }
@@ -82,6 +83,8 @@ final class LecteurAppleMusic: LecteurSeance {
     func suivant() {
         guard preparer() else { return }
         lecteur.skipToNextItem()
+        // Hors section avec musique, passer au morceau suivant ne doit pas relancer la lecture.
+        if !actif { lecteur.pause() }
     }
 
     func arreter() {

@@ -110,16 +110,23 @@ protocol LecteurSeance: AnyObject {
     func arreter()
 }
 
-/// Lecteur de la musique pendant la séance : fondu, baisse de volume, reprise là où la section précédente s'est arrêtée.
-/// Même logique que `Musique.sync` de l'app web (musique.js).
+/// Lecteur de la musique pendant la séance : fondus, baisse progressive, fondu enchaîné entre morceaux,
+/// reprise là où la section précédente s'est arrêtée. Même logique que `Musique.sync` de l'app web (musique.js).
 @MainActor
 final class LecteurMusique: NSObject, AVAudioPlayerDelegate, LecteurSeance {
+    /// Durée de la baisse ou de la remontée du volume (voix, consignes, entrée et sortie de section).
+    static let fondu: TimeInterval = 1
+    /// Durée du fondu enchaîné d'un morceau au suivant.
+    static let enchaine: TimeInterval = 4
+
     private let playlist: Playlist
     private var lecteur: AVAudioPlayer?
+    /// Morceau précédent, en train de s'éteindre pendant le fondu enchaîné.
+    private var sortant: AVAudioPlayer?
     private var ordre: [Morceau] = []
     private var pos = 0
     private var actif = false            // musique voulue et en cours
-    private var cible: Float = -1
+    private var cible: Float = 0
     private(set) var courant: Morceau?
 
     init(playlist: Playlist) { self.playlist = playlist }
@@ -136,42 +143,83 @@ final class LecteurMusique: NSObject, AVAudioPlayerDelegate, LecteurSeance {
                 actif = true
                 lecteur?.volume = 0
                 lecteur?.play()
-                cible = -1
+                cible = 0
             }
-            volume(niveau, fondu: 0.4)
-        } else if actif {
-            actif = false
-            volume(0, fondu: 0.6)
-            mettreEnPause(apres: 0.65)
+            volume(niveau)
+            if let l = lecteur, l.duration > 0, l.duration - l.currentTime <= dureeEnchaine(l), sortant == nil {
+                enchainer()
+            }
+        } else {
+            if actif {
+                actif = false
+                volume(0)
+                mettreEnPause(apres: Self.fondu + 0.05)
+            } else if lecteur?.isPlaying == true, cible > 0 {
+                // Sécurité : rien ne doit jouer hors d'une section avec musique.
+                volume(0)
+                mettreEnPause(apres: Self.fondu + 0.05)
+            }
+            couperSortant()
         }
     }
 
     /// Pause du chrono : coupure rapide, la position est gardée.
     func suspendre() {
+        couperSortant()
         guard actif else { return }
         actif = false
-        volume(0, fondu: 0.15)
+        cible = 0
+        lecteur?.setVolume(0, fadeDuration: 0.15)
         mettreEnPause(apres: 0.2)
     }
 
+    /// Morceau suivant : fondu enchaîné si la musique joue.
     func suivant() {
-        let jouait = actif
+        if actif { enchainer(); return }
         pos += 1
         lecteur?.stop(); lecteur = nil
         _ = charger()
-        if jouait { lecteur?.volume = cible < 0 ? 0 : cible; lecteur?.play() }
     }
 
     func arreter() {
         actif = false
+        couperSortant()
         lecteur?.setVolume(0, fadeDuration: 0.8)
-        let l = lecteur
+        arreterPlusTard(lecteur, apres: 0.85)
         lecteur = nil
-        Task { @MainActor in
-            try? await Task.sleep(for: .milliseconds(850))
-            l?.stop()
-        }
         courant = nil
+    }
+
+    private func dureeEnchaine(_ l: AVAudioPlayer) -> TimeInterval { min(Self.enchaine, l.duration / 3) }
+
+    /// Le morceau en cours s'éteint pendant que le suivant monte.
+    private func enchainer() {
+        guard let ancien = lecteur else { return }
+        let d = dureeEnchaine(ancien)
+        couperSortant()
+        sortant = ancien
+        ancien.setVolume(0, fadeDuration: d)
+        arreterPlusTard(ancien, apres: d + 0.1)
+        pos += 1
+        lecteur = nil
+        guard charger(), let l = lecteur else { return }
+        l.volume = 0
+        l.play()
+        l.setVolume(cible, fadeDuration: d)
+    }
+
+    private func couperSortant() {
+        sortant?.stop()
+        sortant = nil
+    }
+
+    private func arreterPlusTard(_ l: AVAudioPlayer?, apres s: Double) {
+        guard let l else { return }
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(for: .seconds(s))
+            l.stop()
+            if self?.sortant === l { self?.sortant = nil }
+        }
     }
 
     /// Met en pause à la fin du fondu, sauf si la musique a été relancée entre-temps.
@@ -184,11 +232,12 @@ final class LecteurMusique: NSObject, AVAudioPlayerDelegate, LecteurSeance {
         }
     }
 
-    private func volume(_ v: Float, fondu: TimeInterval) {
+    /// Volume visé, atteint progressivement en une seconde.
+    private func volume(_ v: Float) {
         let v = max(0, min(1, v))
         guard abs(v - cible) > 0.005 else { return }
         cible = v
-        lecteur?.setVolume(v, fadeDuration: fondu)
+        lecteur?.setVolume(v, fadeDuration: Self.fondu)
     }
 
     private func melanger() {
@@ -215,6 +264,7 @@ final class LecteurMusique: NSObject, AVAudioPlayerDelegate, LecteurSeance {
         return false
     }
 
+    /// Fin d'un morceau sans fondu enchaîné (pause juste avant la fin) : on passe au suivant.
     nonisolated func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         let fini = ObjectIdentifier(player)
         Task { @MainActor in
@@ -223,7 +273,11 @@ final class LecteurMusique: NSObject, AVAudioPlayerDelegate, LecteurSeance {
             pos += 1
             lecteur = nil
             guard charger() else { return }
-            if jouait { lecteur?.volume = cible < 0 ? 0 : cible; lecteur?.play() }
+            if jouait {
+                lecteur?.volume = 0
+                lecteur?.play()
+                lecteur?.setVolume(cible, fadeDuration: Self.fondu)
+            }
         }
     }
 }

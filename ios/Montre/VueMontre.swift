@@ -28,13 +28,14 @@ struct VueMontre: View {
         let restant = e.restant(a: maintenant)
         let fait = max(0, e.dureeSequence - restant)
         let p = e.dureeSequence > 0 ? min(1, fait / e.dureeSequence) : 0
-        let coul = e.enMarche ? Theme.couleur(e.famille) : Theme.discret
+        let phase = Color(hex: e.couleur ?? Theme.couleurParDefaut(e.famille))
+        let coul = e.enMarche ? phase : Theme.discret
         let s = Int(ceil(restant))
         return VStack(alignment: .leading, spacing: 3) {
             HStack(alignment: .center, spacing: 4) {
                 Text(formatChrono(restant))
                     .font(Theme.affiche(52)).monospacedDigit()
-                    .foregroundStyle(e.enMarche ? Theme.couleur(e.famille) : Theme.texte)
+                    .foregroundStyle(e.enMarche ? phase : Theme.texte)
                     .lineLimit(1).minimumScaleFactor(0.6)
                 if e.musiquePrevue {
                     Spacer(minLength: 0)
