@@ -22,6 +22,7 @@
 		2F28D4726AB4CCCDFBB60051 /* BigShouldersDisplay-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B61A5262B9AD1C8237FDDF51 /* BigShouldersDisplay-Black.ttf */; };
 		33607939E473F2C83F910E63 /* coach-dernierRound-2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6E643D8D059BC4982A4B2B8C /* coach-dernierRound-2.m4a */; };
 		45609A31F3632CA88641F5F2 /* coach-debutTravail-3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3E680F9012C112587CE7C3C8 /* coach-debutTravail-3.m4a */; };
+		475340C504D67DE98FA1E8BC /* EcoutePlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DE09C91696A662E157B2E1 /* EcoutePlaylist.swift */; };
 		5178943C5C86B1B7140C82F8 /* Barlow-700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C656599CF2C2DA7C722225E /* Barlow-700.ttf */; };
 		521D3EDDCEC6BBB6694B37D2 /* coach-repos-2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 0A4539DF0A447C8DF3A6F3F8 /* coach-repos-2.m4a */; };
 		53D1D1BEB49AEC6BA98BE627 /* coach-debutTravail-1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = FEF579DD08046B530E4FA81C /* coach-debutTravail-1.m4a */; };
@@ -121,6 +122,7 @@
 		B4C8F48B8282962D7D190E9B /* LienTelephone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LienTelephone.swift; sourceTree = "<group>"; };
 		B52018CB0415A80DD92C97DB /* coach-miTravail-2.m4a */ = {isa = PBXFileReference; path = "coach-miTravail-2.m4a"; sourceTree = "<group>"; };
 		B61A5262B9AD1C8237FDDF51 /* BigShouldersDisplay-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BigShouldersDisplay-Black.ttf"; sourceTree = "<group>"; };
+		C4DE09C91696A662E157B2E1 /* EcoutePlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoutePlaylist.swift; sourceTree = "<group>"; };
 		C90BDB20529EB2902FEE7A30 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		CAB590A2F896062372527B5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF50FA0FB656722E8FE9A3C3 /* coach-dixSecondes-3.m4a */ = {isa = PBXFileReference; path = "coach-dixSecondes-3.m4a"; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				CAB590A2F896062372527B5D /* Assets.xcassets */,
 				8CDF0812F9FD73F68A283360 /* Bibliotheque.swift */,
 				304294BD127B41CFE1183D01 /* ChronoTatamiApp.swift */,
+				C4DE09C91696A662E157B2E1 /* EcoutePlaylist.swift */,
 				232ACC5AF45607AC03CAD7B9 /* Info.plist */,
 				904C0EEE2DFD67AA91116A18 /* LienMontre.swift */,
 				4186861D232C5FA0F559F5C9 /* ListeSeances.swift */,
@@ -440,6 +443,7 @@
 				5C104D99C4E34B03DFB39E03 /* AppleMusic.swift in Sources */,
 				19B27F18713B510784C02530 /* Bibliotheque.swift in Sources */,
 				6771C068A816C5F78EEB9FA9 /* ChronoTatamiApp.swift in Sources */,
+				475340C504D67DE98FA1E8BC /* EcoutePlaylist.swift in Sources */,
 				D83A68F852E2D8684CB7F6D8 /* LienMontre.swift in Sources */,
 				ACDA565402C4273F7AB9DB9A /* ListeSeances.swift in Sources */,
 				72D8544D42639845479D8AD8 /* Musique.swift in Sources */,

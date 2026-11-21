@@ -24,6 +24,7 @@ struct VuePlaylist: View {
                     if playlist.appleMusic != nil {
                         Button("Utiliser les fichiers importés à la place", role: .destructive) { playlist.appleMusic = nil }
                     }
+                    if !playlist.vide { EcoutePlaylist() }
                 } header: { Text("Source") } footer: {
                     Text(playlist.appleMusic == nil
                          ? "Sans playlist Musique, la séance joue les fichiers importés ci-dessous."

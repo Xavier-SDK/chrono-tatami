@@ -65,11 +65,22 @@ final class LecteurAppleMusic: LecteurSeance {
         return true
     }
 
+    /// Dernière relance, pour ne pas solliciter le lecteur à chaque dixième de seconde.
+    private var relance = Date.distantPast
+
     func synchroniser(voulue: Bool, niveau: Float) {
         if voulue {
-            guard !actif, preparer() else { return }
-            actif = true
-            lecteur.play()
+            guard preparer() else { return }
+            if !actif {
+                actif = true
+                relance = Date()
+                lecteur.play()
+            } else if lecteur.playbackState != .playing, Date().timeIntervalSince(relance) > 1 {
+                // iOS met le lecteur en pause quand l'app rend la main sur l'audio (fin d'atténuation,
+                // relance du coach, interruption) : on le relance tant que la section a de la musique.
+                relance = Date()
+                lecteur.play()
+            }
         } else { suspendre() }
     }
 

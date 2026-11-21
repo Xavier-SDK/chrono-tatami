@@ -16,8 +16,6 @@ struct VueReglages: View {
     @AppStorage("test") private var test = false
     @State private var voirPlaylist = false
     @AppStorage(Voix.cleCoach) private var coach = true
-    /// Écoute de la playlist depuis les réglages.
-    @State private var apercu: LecteurSeance?
     @State private var extraitCoach: AVAudioPlayer?
     private let palette = Palette.partagee
 
@@ -58,16 +56,7 @@ struct VueReglages: View {
                             Text(playlist.resume).foregroundStyle(Theme.attenue)
                         }
                     }
-                    if !playlist.vide {
-                        Button { basculerApercu() } label: {
-                            Label(apercu == nil ? "Écouter la playlist" : "Arrêter l'écoute",
-                                  systemImage: apercu == nil ? "play.circle.fill" : "stop.circle.fill")
-                        }
-                        if let a = apercu, let m = a.courant {
-                            Text("♪ " + m.nom + (m.artiste.isEmpty ? "" : " · " + m.artiste))
-                                .font(.footnote).foregroundStyle(Theme.attenue).lineLimit(1)
-                        }
-                    }
+                    if !playlist.vide { EcoutePlaylist(volume: volume) }
                     Toggle("Lecture aléatoire", isOn: $playlist.aleatoire)
                     if playlist.appleMusic == nil {
                         VStack(alignment: .leading) {
@@ -116,21 +105,8 @@ struct VueReglages: View {
             .navigationTitle("Réglages")
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("OK") { fermer() } } }
             .sheet(isPresented: $voirPlaylist) { VuePlaylist() }
-            .onChange(of: volume) { _, v in apercu?.synchroniser(voulue: true, niveau: Float(v)) }
-            .onChange(of: playlist.resume) { arreterApercu() }
-            .onChange(of: voirPlaylist) { if voirPlaylist { arreterApercu() } }
-            .onDisappear { arreterApercu() }
-        }
-    }
 
-    private func basculerApercu() {
-        if apercu != nil { arreterApercu(); return }
-        let s = AVAudioSession.sharedInstance()
-        try? s.setCategory(.playback, mode: .default, options: [.mixWithOthers])
-        try? s.setActive(true)
-        let l = playlist.lecteur()
-        l.synchroniser(voulue: true, niveau: Float(volume))
-        apercu = l
+        }
     }
 
     private func ecouterCoach() {
@@ -141,11 +117,6 @@ struct VueReglages: View {
         try? AVAudioSession.sharedInstance().setActive(true)
         extraitCoach = p
         p.play()
-    }
-
-    private func arreterApercu() {
-        apercu?.arreter()
-        apercu = nil
     }
 
     private static func nom(_ f: Famille) -> String {
