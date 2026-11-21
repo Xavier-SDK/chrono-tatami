@@ -108,6 +108,12 @@ protocol LecteurSeance: AnyObject {
     func suspendre()
     func suivant()
     func arreter()
+    /// Raison pour laquelle rien ne joue, à afficher (playlist introuvable, titres non téléchargés…).
+    var probleme: String? { get }
+}
+
+extension LecteurSeance {
+    var probleme: String? { nil }
 }
 
 /// Lecteur de la musique pendant la séance : fondus, baisse progressive, fondu enchaîné entre morceaux,

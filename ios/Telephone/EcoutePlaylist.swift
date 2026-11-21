@@ -7,6 +7,7 @@ struct EcoutePlaylist: View {
     var volume: Double = UserDefaults.standard.object(forKey: "musVol") as? Double ?? 0.8
     @State private var lecteur: LecteurSeance?
     @State private var titre: String?
+    @State private var probleme: String?
 
     var body: some View {
         Button { basculer() } label: {
@@ -14,6 +15,7 @@ struct EcoutePlaylist: View {
                 Label(lecteur == nil ? "Écouter la playlist" : "Arrêter l'écoute",
                       systemImage: lecteur == nil ? "play.circle.fill" : "stop.circle.fill")
                 if let titre { Text(titre).font(.footnote).foregroundStyle(Theme.attenue).lineLimit(1) }
+                if let probleme { Text(probleme).font(.footnote).foregroundStyle(.orange) }
             }
         }
         .disabled(playlist.vide)
@@ -21,6 +23,7 @@ struct EcoutePlaylist: View {
             // Titre en cours, rafraîchi tant que l'écoute dure ; relance si iOS a mis la lecture en pause.
             while lecteur != nil, !Task.isCancelled {
                 lecteur?.synchroniser(voulue: true, niveau: Float(volume))
+                probleme = lecteur?.probleme
                 titre = lecteur?.courant.map { "♪ " + $0.nom + ($0.artiste.isEmpty ? "" : " · " + $0.artiste) }
                 try? await Task.sleep(for: .seconds(1))
             }
@@ -43,5 +46,6 @@ struct EcoutePlaylist: View {
         lecteur?.arreter()
         lecteur = nil
         titre = nil
+        probleme = nil
     }
 }

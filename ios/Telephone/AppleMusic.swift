@@ -23,10 +23,14 @@ enum BibliothequeMusique {
             .sorted { $0.nom.localizedCompare($1.nom) == .orderedAscending }
     }
 
-    static func titres(_ p: PlaylistApple) -> [MPMediaItem] {
+    static func requete(_ p: PlaylistApple) -> MPMediaQuery {
         let q = MPMediaQuery.playlists()
         q.addFilterPredicate(MPMediaPropertyPredicate(value: NSNumber(value: p.id), forProperty: MPMediaPlaylistPropertyPersistentID))
-        return q.collections?.first?.items ?? []
+        return q
+    }
+
+    static func titres(_ p: PlaylistApple) -> [MPMediaItem] {
+        requete(p).collections?.first?.items ?? []
     }
 }
 
@@ -53,14 +57,32 @@ final class LecteurAppleMusic: LecteurSeance {
         return Morceau(id: String(m.persistentID), nom: m.title ?? "", artiste: m.artist ?? "", duree: m.playbackDuration)
     }
 
+    private(set) var probleme: String?
+
     private func preparer() -> Bool {
         if pret { return true }
+        guard disponible else {
+            probleme = "Accès à la bibliothèque refusé : Réglages > Apps > Chrono Tatami > Musique et médias."
+            return false
+        }
         let items = BibliothequeMusique.titres(playlist)
-        guard !items.isEmpty else { return false }
-        lecteur.setQueue(with: MPMediaItemCollection(items: items))
+        guard !items.isEmpty else {
+            probleme = "Playlist « \(playlist.nom) » introuvable ou vide. Choisis-la à nouveau."
+            return false
+        }
+        // File construite depuis la requête de la playlist : iOS résout lui-même les titres Apple Music
+        // (dans le nuage ou téléchargés), ce que la liste d'éléments ne fait pas toujours.
+        lecteur.setQueue(with: BibliothequeMusique.requete(playlist))
         lecteur.shuffleMode = aleatoire ? .songs : .off
         lecteur.repeatMode = .all
-        lecteur.prepareToPlay()
+        let nuage = items.filter(\.isCloudItem).count
+        lecteur.prepareToPlay { [weak self] erreur in
+            guard let erreur else { return }
+            let texte = "Lecture impossible (\(erreur.localizedDescription))."
+                + (nuage > 0 ? " \(nuage) titre\(nuage > 1 ? "s" : "") sur \(items.count) non téléchargé\(nuage > 1 ? "s" : "") : télécharge la playlist dans l'app Musique." : "")
+            print("[Musique] prepareToPlay : \(erreur)")
+            Task { @MainActor in self?.probleme = texte }
+        }
         pret = true
         return true
     }
