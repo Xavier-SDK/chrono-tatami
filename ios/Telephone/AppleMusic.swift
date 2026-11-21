@@ -39,9 +39,8 @@ enum BibliothequeMusique {
 @MainActor
 final class LecteurAppleMusic: LecteurSeance {
     /// Lecteur propre à l'app : il ne touche pas à la file de l'app Musique.
-    /// Seuls les titres téléchargés sur l'iPhone sont mis en file : un titre Apple Music resté dans le nuage
-    /// ne se charge pas depuis une app tierce, et le lecteur restait bloqué dessus, muet, ce qui coupait aussi
-    /// l'app Musique (même service de lecture) jusqu'au redémarrage de l'iPhone.
+    /// Attention : iOS coupe le son des titres Apple Music (protégés) tant que l'écran de l'iPhone est
+    /// enregistré ou partagé (recopie, Xcode, enregistrement d'écran). L'app n'y peut rien.
     private let lecteur = MPMusicPlayerController.applicationQueuePlayer
     private let systeme = false
     private let playlist: PlaylistApple
@@ -80,16 +79,7 @@ final class LecteurAppleMusic: LecteurSeance {
             etat = .echec
             return
         }
-        titres = tous.filter { !$0.isCloudItem }
-        let manquants = tous.count - titres.count
-        guard !titres.isEmpty else {
-            probleme = "Aucun titre de « \(playlist.nom) » n'est téléchargé sur l'iPhone. Dans l'app Musique, ouvre la playlist et touche Télécharger."
-            etat = .echec
-            return
-        }
-        if manquants > 0 {
-            probleme = "\(manquants) titre\(manquants > 1 ? "s" : "") sur \(tous.count) non téléchargé\(manquants > 1 ? "s" : "") : \(manquants > 1 ? "ils sont ignorés" : "il est ignoré"). Télécharge la playlist dans l'app Musique."
-        }
+        titres = tous
         etat = .chargement
         charger()
     }
