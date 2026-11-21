@@ -20,13 +20,16 @@
 		6D56B3D90ED0323F96E94B3B /* ChronoMontreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B06EC9A90ADF9A3FF2D387D /* ChronoMontreApp.swift */; };
 		72D8544D42639845479D8AD8 /* Musique.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FAAC1DB8365E1BF124747E /* Musique.swift */; };
 		75DC15B86B965DA867E53E09 /* VuePlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F001D28E40A9816E86607 /* VuePlaylist.swift */; };
+		7D32FDC364B80D14D8AAE4F4 /* VueReglages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E550D811CE8083F55A89301F /* VueReglages.swift */; };
 		80998EB63C01254BC46EE6A3 /* VueCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367404E7299BAD99B675BE10 /* VueCourse.swift */; };
 		88EE2BF9D3742C9386850217 /* LienTelephone.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C8F48B8282962D7D190E9B /* LienTelephone.swift */; };
 		8A9FA6BA0F54AB3004D1768B /* 2026-11-19-debutants-dojo.md in Resources */ = {isa = PBXBuildFile; fileRef = 71DC60D5C8CF695E0BBB868A /* 2026-11-19-debutants-dojo.md */; };
 		8CB9CEB5FDAF1C951FAD0B51 /* VuePrep.swift in Sources */ = {isa = PBXBuildFile; fileRef = D416796D45531EB71FC8E493 /* VuePrep.swift */; };
 		ACDA565402C4273F7AB9DB9A /* ListeSeances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4186861D232C5FA0F559F5C9 /* ListeSeances.swift */; };
+		B05CCEB410F31B4E4E0DDED6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAB590A2F896062372527B5D /* Assets.xcassets */; };
 		B73CA49A45A77045FC28FBD1 /* BigShouldersDisplay-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B61A5262B9AD1C8237FDDF51 /* BigShouldersDisplay-Black.ttf */; };
 		C43A87F8EC22D00F68A6E929 /* ChronoTatamiMontre.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 29FCD2DA287FAEE29FA1E51D /* ChronoTatamiMontre.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CE10B5B5968969F1CC975289 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 054569EE49ECA9DD8C02DCDB /* Assets.xcassets */; };
 		CFB19638D4CC7758DA152F71 /* Barlow-600.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88122049AAD5C4416CCBD113 /* Barlow-600.ttf */; };
 		CFE7817940895AB53C2464F2 /* ChronoTatamiCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9629D2D5798AC28E5FB7ECDE /* ChronoTatamiCore */; };
 		D83A68F852E2D8684CB7F6D8 /* LienMontre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C0EEE2DFD67AA91116A18 /* LienMontre.swift */; };
@@ -60,6 +63,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		054569EE49ECA9DD8C02DCDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0B06EC9A90ADF9A3FF2D387D /* ChronoMontreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChronoMontreApp.swift; sourceTree = "<group>"; };
 		1A9F001D28E40A9816E86607 /* VuePlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuePlaylist.swift; sourceTree = "<group>"; };
 		1AA75B76B51F009C81232886 /* ChronoTatami.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ChronoTatami.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,8 +84,10 @@
 		B4C8F48B8282962D7D190E9B /* LienTelephone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LienTelephone.swift; sourceTree = "<group>"; };
 		B61A5262B9AD1C8237FDDF51 /* BigShouldersDisplay-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BigShouldersDisplay-Black.ttf"; sourceTree = "<group>"; };
 		C90BDB20529EB2902FEE7A30 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		CAB590A2F896062372527B5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2D9C209DDC9FE2BE6E8609B /* ChronoTatamiCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ChronoTatamiCore; path = ChronoTatamiCore; sourceTree = SOURCE_ROOT; };
 		D416796D45531EB71FC8E493 /* VuePrep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuePrep.swift; sourceTree = "<group>"; };
+		E550D811CE8083F55A89301F /* VueReglages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VueReglages.swift; sourceTree = "<group>"; };
 		EE79BAC4C0C29860EF93570B /* AppleMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusic.swift; sourceTree = "<group>"; };
 		F6FAAC1DB8365E1BF124747E /* Musique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Musique.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +123,7 @@
 		0D19F1C08C1730B36507082A /* Montre */ = {
 			isa = PBXGroup;
 			children = (
+				054569EE49ECA9DD8C02DCDB /* Assets.xcassets */,
 				0B06EC9A90ADF9A3FF2D387D /* ChronoMontreApp.swift */,
 				4CA0D99407A93FB0B74D0A6C /* Info.plist */,
 				B4C8F48B8282962D7D190E9B /* LienTelephone.swift */,
@@ -129,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				EE79BAC4C0C29860EF93570B /* AppleMusic.swift */,
+				CAB590A2F896062372527B5D /* Assets.xcassets */,
 				8CDF0812F9FD73F68A283360 /* Bibliotheque.swift */,
 				304294BD127B41CFE1183D01 /* ChronoTatamiApp.swift */,
 				232ACC5AF45607AC03CAD7B9 /* Info.plist */,
@@ -140,6 +148,7 @@
 				367404E7299BAD99B675BE10 /* VueCourse.swift */,
 				1A9F001D28E40A9816E86607 /* VuePlaylist.swift */,
 				D416796D45531EB71FC8E493 /* VuePrep.swift */,
+				E550D811CE8083F55A89301F /* VueReglages.swift */,
 				01A97CD6B92BBD715E8D1D27 /* Ressources */,
 			);
 			path = Telephone;
@@ -292,6 +301,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE10B5B5968969F1CC975289 /* Assets.xcassets in Resources */,
 				0CDFCD07D49070581665FE61 /* Barlow-600.ttf in Resources */,
 				5178943C5C86B1B7140C82F8 /* Barlow-700.ttf in Resources */,
 				2F28D4726AB4CCCDFBB60051 /* BigShouldersDisplay-Black.ttf in Resources */,
@@ -303,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A9FA6BA0F54AB3004D1768B /* 2026-11-19-debutants-dojo.md in Resources */,
+				B05CCEB410F31B4E4E0DDED6 /* Assets.xcassets in Resources */,
 				CFB19638D4CC7758DA152F71 /* Barlow-600.ttf in Resources */,
 				2780F6E4F2245B96D55BFC3E /* Barlow-700.ttf in Resources */,
 				B73CA49A45A77045FC28FBD1 /* BigShouldersDisplay-Black.ttf in Resources */,
@@ -339,6 +350,7 @@
 				80998EB63C01254BC46EE6A3 /* VueCourse.swift in Sources */,
 				75DC15B86B965DA867E53E09 /* VuePlaylist.swift in Sources */,
 				8CB9CEB5FDAF1C951FAD0B51 /* VuePrep.swift in Sources */,
+				7D32FDC364B80D14D8AAE4F4 /* VueReglages.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

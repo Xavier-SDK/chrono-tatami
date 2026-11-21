@@ -27,6 +27,11 @@ final class Seance {
     private(set) var morceau: Morceau?
     var volumeMusique: Double { didSet { UserDefaults.standard.set(volumeMusique, forKey: "musVol"); synchroniserMusique() } }
     @ObservationIgnored private let baisse: Double
+    /// Réglages : bips 3-2-1, gong et signaux de séquence, écran allumé, mode essai ×10.
+    @ObservationIgnored private let bips: Bool
+    @ObservationIgnored private let gong: Bool
+    @ObservationIgnored private let ecranAllume: Bool
+    @ObservationIgnored private let vitesse: Double
 
     init(cours: Cours, depuisBloc: Int, voix: Bool, voixChaqueRound: Bool, playlist: Playlist, sectionsMusique: Set<Int>) {
         var c = Chrono(cours: cours, depuisBloc: depuisBloc)
@@ -39,6 +44,10 @@ final class Seance {
         let d = UserDefaults.standard
         volumeMusique = d.object(forKey: "musVol") as? Double ?? 0.8
         baisse = (d.object(forKey: "musBas") as? Double ?? 20) / 100
+        bips = d.object(forKey: "bips") as? Bool ?? true
+        gong = d.object(forKey: "gong") as? Bool ?? true
+        ecranAllume = d.object(forKey: "veille") as? Bool ?? true
+        vitesse = d.bool(forKey: "test") ? 10 : 1
         lien = LienMontre { [weak self] cmd in self?.commande(cmd) }
     }
 
@@ -46,7 +55,7 @@ final class Seance {
 
     func lancer() {
         sons.demarrer()
-        UIApplication.shared.isIdleTimerDisabled = true
+        UIApplication.shared.isIdleTimerDisabled = ecranAllume
         jouer(chrono.demarrer())
         dernier = Date()
         minuterie = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
@@ -68,7 +77,7 @@ final class Seance {
         let dt = maintenant.timeIntervalSince(dernier)
         dernier = maintenant
         // Plus d'une seconde d'écart : retour de veille, on rattrape sans sons.
-        jouer(chrono.avancer(dt, silencieux: dt > 1.5))
+        jouer(chrono.avancer(dt * vitesse, silencieux: dt > 1.5))
         if miRound != nil, maintenant > finMiRound { miRound = nil }
         synchroniserMusique()
         publier(important: false)
@@ -103,10 +112,10 @@ final class Seance {
     private func jouer(_ ev: [Evenement]) {
         for e in ev {
             switch e {
-            case .bip: sons.jouer("bip")
-            case .gong: sons.jouer("gong")
-            case .double: sons.jouer("double")
-            case .triple: sons.jouer("triple")
+            case .bip: if bips { sons.jouer("bip") }
+            case .gong: if gong { sons.jouer("gong") }
+            case .double: if gong { sons.jouer("double") }
+            case .triple: if gong { sons.jouer("triple") }
             case let .voix(t, forcee): sons.dire(t, forcee: forcee)
             case let .changementDeRole(t): miRound = t; finMiRound = Date().addingTimeInterval(3)
             case .nouveauBloc: break
