@@ -8,6 +8,11 @@ enum Voix {
     static let cleDebit = "voixDebit"
     static let cleCoach = "coach"
 
+    /// Phrases enregistrées du coach (voix Kevin, ElevenLabs v4) présentes dans l'app.
+    static var enregistrementsCoach: Bool {
+        (Bundle.main.urls(forResourcesWithExtension: "m4a", subdirectory: nil) ?? []).contains { $0.lastPathComponent.hasPrefix("coach-") }
+    }
+
     static var coach: Bool { UserDefaults.standard.object(forKey: cleCoach) as? Bool ?? true }
 
     /// Phrases du coach, tirées au hasard pour ne pas répéter la même.

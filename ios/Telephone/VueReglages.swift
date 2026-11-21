@@ -18,6 +18,7 @@ struct VueReglages: View {
     @AppStorage(Voix.cleCoach) private var coach = true
     /// Écoute de la playlist depuis les réglages.
     @State private var apercu: LecteurSeance?
+    @State private var extraitCoach: AVAudioPlayer?
     private let palette = Palette.partagee
 
     var body: some View {
@@ -37,6 +38,9 @@ struct VueReglages: View {
                     Toggle(isOn: $coach) {
                         Text("Mode coach")
                         Text("Relances pendant l'effort, le repos et le dernier round")
+                    }
+                    if coach, Voix.enregistrementsCoach {
+                        Button { ecouterCoach() } label: { Label("Écouter le coach", systemImage: "megaphone.fill") }
                     }
                     NavigationLink { VueVoix() } label: {
                         HStack {
@@ -127,6 +131,16 @@ struct VueReglages: View {
         let l = playlist.lecteur()
         l.synchroniser(voulue: true, niveau: Float(volume))
         apercu = l
+    }
+
+    private func ecouterCoach() {
+        let urls = (Bundle.main.urls(forResourcesWithExtension: "m4a", subdirectory: nil) ?? [])
+            .filter { $0.lastPathComponent.hasPrefix("coach-") }
+        guard let u = urls.randomElement(), let p = try? AVAudioPlayer(contentsOf: u) else { return }
+        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .duckOthers])
+        try? AVAudioSession.sharedInstance().setActive(true)
+        extraitCoach = p
+        p.play()
     }
 
     private func arreterApercu() {

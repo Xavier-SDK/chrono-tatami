@@ -7,19 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05EC7D4DC1C10265ACE629EE /* coach-miTravail-4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2B3873B4E118DF1E52BC9056 /* coach-miTravail-4.m4a */; };
 		0CDFCD07D49070581665FE61 /* Barlow-600.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88122049AAD5C4416CCBD113 /* Barlow-600.ttf */; };
+		0F51C343ADF0C2638C6D4524 /* coach-miTravail-2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B52018CB0415A80DD92C97DB /* coach-miTravail-2.m4a */; };
 		18845C863B2D42BE4817E0F3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90BDB20529EB2902FEE7A30 /* Theme.swift */; };
 		19B27F18713B510784C02530 /* Bibliotheque.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDF0812F9FD73F68A283360 /* Bibliotheque.swift */; };
+		1D594A945DDC7D6084E4FCAE /* coach-dixSecondes-4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F444522024E5A733F0747C4B /* coach-dixSecondes-4.m4a */; };
 		2134C78A1299365949EC4A73 /* Voix.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66C4E33020DFD9CBB4F01DE /* Voix.swift */; };
+		21B09A8E379A50CB8289FD75 /* coach-dixSecondes-1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7C9AD1F6E1A839FFAA52B317 /* coach-dixSecondes-1.m4a */; };
+		23182CB6D06849743924AC83 /* coach-repos-4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EF871B3CF1CB632275F83BF3 /* coach-repos-4.m4a */; };
 		2780F6E4F2245B96D55BFC3E /* Barlow-700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C656599CF2C2DA7C722225E /* Barlow-700.ttf */; };
 		29549ED5692A79AEE41C6C02 /* VueMontre.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF37E1ED09D1191D028CEAD6 /* VueMontre.swift */; };
 		2B2D93532F2BD80860021B01 /* crossfit-seance-type.md in Resources */ = {isa = PBXBuildFile; fileRef = 878BBA4067F49CFF7C0A726B /* crossfit-seance-type.md */; };
 		2F28D4726AB4CCCDFBB60051 /* BigShouldersDisplay-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B61A5262B9AD1C8237FDDF51 /* BigShouldersDisplay-Black.ttf */; };
+		33607939E473F2C83F910E63 /* coach-dernierRound-2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6E643D8D059BC4982A4B2B8C /* coach-dernierRound-2.m4a */; };
+		45609A31F3632CA88641F5F2 /* coach-debutTravail-3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3E680F9012C112587CE7C3C8 /* coach-debutTravail-3.m4a */; };
 		5178943C5C86B1B7140C82F8 /* Barlow-700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C656599CF2C2DA7C722225E /* Barlow-700.ttf */; };
+		521D3EDDCEC6BBB6694B37D2 /* coach-repos-2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 0A4539DF0A447C8DF3A6F3F8 /* coach-repos-2.m4a */; };
+		53D1D1BEB49AEC6BA98BE627 /* coach-debutTravail-1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = FEF579DD08046B530E4FA81C /* coach-debutTravail-1.m4a */; };
+		56116FBD2AC79F5D191601C2 /* coach-miTravail-1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B121B75CC4E4C287C545448C /* coach-miTravail-1.m4a */; };
+		57060AFE43C887D5026D6E39 /* coach-debutTravail-5.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 58C525B9A212D910EDFE5500 /* coach-debutTravail-5.m4a */; };
+		58224EF958F63B3EC46BBF50 /* coach-repos-1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 0CD44A8CCD77F88F461C7897 /* coach-repos-1.m4a */; };
 		5BE65BB8AB15A402480E8244 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90BDB20529EB2902FEE7A30 /* Theme.swift */; };
 		5C104D99C4E34B03DFB39E03 /* AppleMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE79BAC4C0C29860EF93570B /* AppleMusic.swift */; };
+		64FBD49070727083C4FE75A6 /* coach-debutTravail-4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2C6FEAE9AE636484CEA74579 /* coach-debutTravail-4.m4a */; };
 		6771C068A816C5F78EEB9FA9 /* ChronoTatamiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304294BD127B41CFE1183D01 /* ChronoTatamiApp.swift */; };
 		6D56B3D90ED0323F96E94B3B /* ChronoMontreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B06EC9A90ADF9A3FF2D387D /* ChronoMontreApp.swift */; };
+		6FE3C6C00376A5CB62DD6C84 /* coach-dixSecondes-2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EDA18A3BBDCD7BA35F939DD1 /* coach-dixSecondes-2.m4a */; };
 		72D8544D42639845479D8AD8 /* Musique.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FAAC1DB8365E1BF124747E /* Musique.swift */; };
 		75DC15B86B965DA867E53E09 /* VuePlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F001D28E40A9816E86607 /* VuePlaylist.swift */; };
 		7D32FDC364B80D14D8AAE4F4 /* VueReglages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E550D811CE8083F55A89301F /* VueReglages.swift */; };
@@ -27,17 +41,24 @@
 		88EE2BF9D3742C9386850217 /* LienTelephone.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C8F48B8282962D7D190E9B /* LienTelephone.swift */; };
 		8A9FA6BA0F54AB3004D1768B /* 2026-11-19-debutants-dojo.md in Resources */ = {isa = PBXBuildFile; fileRef = 71DC60D5C8CF695E0BBB868A /* 2026-11-19-debutants-dojo.md */; };
 		8CB9CEB5FDAF1C951FAD0B51 /* VuePrep.swift in Sources */ = {isa = PBXBuildFile; fileRef = D416796D45531EB71FC8E493 /* VuePrep.swift */; };
+		9B78B068CCF2524F342C76A6 /* coach-dernierRound-3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 237F617BA225A734D558A5B5 /* coach-dernierRound-3.m4a */; };
 		ACDA565402C4273F7AB9DB9A /* ListeSeances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4186861D232C5FA0F559F5C9 /* ListeSeances.swift */; };
 		B05CCEB410F31B4E4E0DDED6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAB590A2F896062372527B5D /* Assets.xcassets */; };
+		B1B9737BB41F3888C80799C2 /* coach-repos-3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B1B2C68EA3C2E027FD49D6D2 /* coach-repos-3.m4a */; };
 		B73CA49A45A77045FC28FBD1 /* BigShouldersDisplay-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B61A5262B9AD1C8237FDDF51 /* BigShouldersDisplay-Black.ttf */; };
+		BD2EE2D6999CAC2F044000C4 /* coach-debutTravail-2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 1B2444C3F85C07A12E916765 /* coach-debutTravail-2.m4a */; };
 		C43A87F8EC22D00F68A6E929 /* ChronoTatamiMontre.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 29FCD2DA287FAEE29FA1E51D /* ChronoTatamiMontre.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CE10B5B5968969F1CC975289 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 054569EE49ECA9DD8C02DCDB /* Assets.xcassets */; };
 		CFB19638D4CC7758DA152F71 /* Barlow-600.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 88122049AAD5C4416CCBD113 /* Barlow-600.ttf */; };
 		CFE7817940895AB53C2464F2 /* ChronoTatamiCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9629D2D5798AC28E5FB7ECDE /* ChronoTatamiCore */; };
+		D04000059D19457DD1276984 /* coach-miTravail-3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F4525A9097FFCE50C7B7F76A /* coach-miTravail-3.m4a */; };
 		D83A68F852E2D8684CB7F6D8 /* LienMontre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904C0EEE2DFD67AA91116A18 /* LienMontre.swift */; };
+		D951205BEDFF43D71C1DCF13 /* coach-dixSecondes-3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = CF50FA0FB656722E8FE9A3C3 /* coach-dixSecondes-3.m4a */; };
 		D9F0900CF198A78710F1628F /* Sons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F460D16CE178D0917CFD87 /* Sons.swift */; };
 		DE94B3A371B40C86262D7F2E /* Seance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1C0FABA7B2E243A59F10B5 /* Seance.swift */; };
 		E0C21937B675C6909F208EFE /* ChronoTatamiCore in Frameworks */ = {isa = PBXBuildFile; productRef = 66EC37105F394CB49513A5A6 /* ChronoTatamiCore */; };
+		E3C081EF16951AAFC25E5D3A /* coach-fin-1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 57F66A386309139185FB4155 /* coach-fin-1.m4a */; };
+		F53434917A69FB930DBDDF95 /* coach-dernierRound-1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D0A5B4B998E4E0E4DD77791C /* coach-dernierRound-1.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,17 +87,28 @@
 
 /* Begin PBXFileReference section */
 		054569EE49ECA9DD8C02DCDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0A4539DF0A447C8DF3A6F3F8 /* coach-repos-2.m4a */ = {isa = PBXFileReference; path = "coach-repos-2.m4a"; sourceTree = "<group>"; };
 		0B06EC9A90ADF9A3FF2D387D /* ChronoMontreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChronoMontreApp.swift; sourceTree = "<group>"; };
+		0CD44A8CCD77F88F461C7897 /* coach-repos-1.m4a */ = {isa = PBXFileReference; path = "coach-repos-1.m4a"; sourceTree = "<group>"; };
 		1A9F001D28E40A9816E86607 /* VuePlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuePlaylist.swift; sourceTree = "<group>"; };
 		1AA75B76B51F009C81232886 /* ChronoTatami.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ChronoTatami.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B2444C3F85C07A12E916765 /* coach-debutTravail-2.m4a */ = {isa = PBXFileReference; path = "coach-debutTravail-2.m4a"; sourceTree = "<group>"; };
 		232ACC5AF45607AC03CAD7B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		237F617BA225A734D558A5B5 /* coach-dernierRound-3.m4a */ = {isa = PBXFileReference; path = "coach-dernierRound-3.m4a"; sourceTree = "<group>"; };
 		29FCD2DA287FAEE29FA1E51D /* ChronoTatamiMontre.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChronoTatamiMontre.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B3873B4E118DF1E52BC9056 /* coach-miTravail-4.m4a */ = {isa = PBXFileReference; path = "coach-miTravail-4.m4a"; sourceTree = "<group>"; };
+		2C6FEAE9AE636484CEA74579 /* coach-debutTravail-4.m4a */ = {isa = PBXFileReference; path = "coach-debutTravail-4.m4a"; sourceTree = "<group>"; };
 		304294BD127B41CFE1183D01 /* ChronoTatamiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChronoTatamiApp.swift; sourceTree = "<group>"; };
 		367404E7299BAD99B675BE10 /* VueCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VueCourse.swift; sourceTree = "<group>"; };
+		3E680F9012C112587CE7C3C8 /* coach-debutTravail-3.m4a */ = {isa = PBXFileReference; path = "coach-debutTravail-3.m4a"; sourceTree = "<group>"; };
 		4186861D232C5FA0F559F5C9 /* ListeSeances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeSeances.swift; sourceTree = "<group>"; };
 		4CA0D99407A93FB0B74D0A6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		57F66A386309139185FB4155 /* coach-fin-1.m4a */ = {isa = PBXFileReference; path = "coach-fin-1.m4a"; sourceTree = "<group>"; };
+		58C525B9A212D910EDFE5500 /* coach-debutTravail-5.m4a */ = {isa = PBXFileReference; path = "coach-debutTravail-5.m4a"; sourceTree = "<group>"; };
+		6E643D8D059BC4982A4B2B8C /* coach-dernierRound-2.m4a */ = {isa = PBXFileReference; path = "coach-dernierRound-2.m4a"; sourceTree = "<group>"; };
 		71DC60D5C8CF695E0BBB868A /* 2026-11-19-debutants-dojo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "2026-11-19-debutants-dojo.md"; sourceTree = "<group>"; };
 		7C656599CF2C2DA7C722225E /* Barlow-700.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Barlow-700.ttf"; sourceTree = "<group>"; };
+		7C9AD1F6E1A839FFAA52B317 /* coach-dixSecondes-1.m4a */ = {isa = PBXFileReference; path = "coach-dixSecondes-1.m4a"; sourceTree = "<group>"; };
 		878BBA4067F49CFF7C0A726B /* crossfit-seance-type.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "crossfit-seance-type.md"; sourceTree = "<group>"; };
 		88122049AAD5C4416CCBD113 /* Barlow-600.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Barlow-600.ttf"; sourceTree = "<group>"; };
 		8B1C0FABA7B2E243A59F10B5 /* Seance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seance.swift; sourceTree = "<group>"; };
@@ -84,16 +116,26 @@
 		904C0EEE2DFD67AA91116A18 /* LienMontre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LienMontre.swift; sourceTree = "<group>"; };
 		A7F460D16CE178D0917CFD87 /* Sons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sons.swift; sourceTree = "<group>"; };
 		AF37E1ED09D1191D028CEAD6 /* VueMontre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VueMontre.swift; sourceTree = "<group>"; };
+		B121B75CC4E4C287C545448C /* coach-miTravail-1.m4a */ = {isa = PBXFileReference; path = "coach-miTravail-1.m4a"; sourceTree = "<group>"; };
+		B1B2C68EA3C2E027FD49D6D2 /* coach-repos-3.m4a */ = {isa = PBXFileReference; path = "coach-repos-3.m4a"; sourceTree = "<group>"; };
 		B4C8F48B8282962D7D190E9B /* LienTelephone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LienTelephone.swift; sourceTree = "<group>"; };
+		B52018CB0415A80DD92C97DB /* coach-miTravail-2.m4a */ = {isa = PBXFileReference; path = "coach-miTravail-2.m4a"; sourceTree = "<group>"; };
 		B61A5262B9AD1C8237FDDF51 /* BigShouldersDisplay-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BigShouldersDisplay-Black.ttf"; sourceTree = "<group>"; };
 		C90BDB20529EB2902FEE7A30 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		CAB590A2F896062372527B5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CF50FA0FB656722E8FE9A3C3 /* coach-dixSecondes-3.m4a */ = {isa = PBXFileReference; path = "coach-dixSecondes-3.m4a"; sourceTree = "<group>"; };
+		D0A5B4B998E4E0E4DD77791C /* coach-dernierRound-1.m4a */ = {isa = PBXFileReference; path = "coach-dernierRound-1.m4a"; sourceTree = "<group>"; };
 		D2D9C209DDC9FE2BE6E8609B /* ChronoTatamiCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ChronoTatamiCore; path = ChronoTatamiCore; sourceTree = SOURCE_ROOT; };
 		D416796D45531EB71FC8E493 /* VuePrep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuePrep.swift; sourceTree = "<group>"; };
 		E550D811CE8083F55A89301F /* VueReglages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VueReglages.swift; sourceTree = "<group>"; };
+		EDA18A3BBDCD7BA35F939DD1 /* coach-dixSecondes-2.m4a */ = {isa = PBXFileReference; path = "coach-dixSecondes-2.m4a"; sourceTree = "<group>"; };
 		EE79BAC4C0C29860EF93570B /* AppleMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusic.swift; sourceTree = "<group>"; };
+		EF871B3CF1CB632275F83BF3 /* coach-repos-4.m4a */ = {isa = PBXFileReference; path = "coach-repos-4.m4a"; sourceTree = "<group>"; };
+		F444522024E5A733F0747C4B /* coach-dixSecondes-4.m4a */ = {isa = PBXFileReference; path = "coach-dixSecondes-4.m4a"; sourceTree = "<group>"; };
+		F4525A9097FFCE50C7B7F76A /* coach-miTravail-3.m4a */ = {isa = PBXFileReference; path = "coach-miTravail-3.m4a"; sourceTree = "<group>"; };
 		F66C4E33020DFD9CBB4F01DE /* Voix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voix.swift; sourceTree = "<group>"; };
 		F6FAAC1DB8365E1BF124747E /* Musique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Musique.swift; sourceTree = "<group>"; };
+		FEF579DD08046B530E4FA81C /* coach-debutTravail-1.m4a */ = {isa = PBXFileReference; path = "coach-debutTravail-1.m4a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +161,7 @@
 		01A97CD6B92BBD715E8D1D27 /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				71102D543D470C6596A143CF /* Coach */,
 				9A1C213ADF9D1716E3CA95AB /* Seances */,
 			);
 			path = Ressources;
@@ -165,6 +208,34 @@
 				D2D9C209DDC9FE2BE6E8609B /* ChronoTatamiCore */,
 			);
 			name = Packages;
+			sourceTree = "<group>";
+		};
+		71102D543D470C6596A143CF /* Coach */ = {
+			isa = PBXGroup;
+			children = (
+				FEF579DD08046B530E4FA81C /* coach-debutTravail-1.m4a */,
+				1B2444C3F85C07A12E916765 /* coach-debutTravail-2.m4a */,
+				3E680F9012C112587CE7C3C8 /* coach-debutTravail-3.m4a */,
+				2C6FEAE9AE636484CEA74579 /* coach-debutTravail-4.m4a */,
+				58C525B9A212D910EDFE5500 /* coach-debutTravail-5.m4a */,
+				D0A5B4B998E4E0E4DD77791C /* coach-dernierRound-1.m4a */,
+				6E643D8D059BC4982A4B2B8C /* coach-dernierRound-2.m4a */,
+				237F617BA225A734D558A5B5 /* coach-dernierRound-3.m4a */,
+				7C9AD1F6E1A839FFAA52B317 /* coach-dixSecondes-1.m4a */,
+				EDA18A3BBDCD7BA35F939DD1 /* coach-dixSecondes-2.m4a */,
+				CF50FA0FB656722E8FE9A3C3 /* coach-dixSecondes-3.m4a */,
+				F444522024E5A733F0747C4B /* coach-dixSecondes-4.m4a */,
+				57F66A386309139185FB4155 /* coach-fin-1.m4a */,
+				B121B75CC4E4C287C545448C /* coach-miTravail-1.m4a */,
+				B52018CB0415A80DD92C97DB /* coach-miTravail-2.m4a */,
+				F4525A9097FFCE50C7B7F76A /* coach-miTravail-3.m4a */,
+				2B3873B4E118DF1E52BC9056 /* coach-miTravail-4.m4a */,
+				0CD44A8CCD77F88F461C7897 /* coach-repos-1.m4a */,
+				0A4539DF0A447C8DF3A6F3F8 /* coach-repos-2.m4a */,
+				B1B2C68EA3C2E027FD49D6D2 /* coach-repos-3.m4a */,
+				EF871B3CF1CB632275F83BF3 /* coach-repos-4.m4a */,
+			);
+			path = Coach;
 			sourceTree = "<group>";
 		};
 		9A1C213ADF9D1716E3CA95AB /* Seances */ = {
@@ -323,6 +394,27 @@
 				CFB19638D4CC7758DA152F71 /* Barlow-600.ttf in Resources */,
 				2780F6E4F2245B96D55BFC3E /* Barlow-700.ttf in Resources */,
 				B73CA49A45A77045FC28FBD1 /* BigShouldersDisplay-Black.ttf in Resources */,
+				53D1D1BEB49AEC6BA98BE627 /* coach-debutTravail-1.m4a in Resources */,
+				BD2EE2D6999CAC2F044000C4 /* coach-debutTravail-2.m4a in Resources */,
+				45609A31F3632CA88641F5F2 /* coach-debutTravail-3.m4a in Resources */,
+				64FBD49070727083C4FE75A6 /* coach-debutTravail-4.m4a in Resources */,
+				57060AFE43C887D5026D6E39 /* coach-debutTravail-5.m4a in Resources */,
+				F53434917A69FB930DBDDF95 /* coach-dernierRound-1.m4a in Resources */,
+				33607939E473F2C83F910E63 /* coach-dernierRound-2.m4a in Resources */,
+				9B78B068CCF2524F342C76A6 /* coach-dernierRound-3.m4a in Resources */,
+				21B09A8E379A50CB8289FD75 /* coach-dixSecondes-1.m4a in Resources */,
+				6FE3C6C00376A5CB62DD6C84 /* coach-dixSecondes-2.m4a in Resources */,
+				D951205BEDFF43D71C1DCF13 /* coach-dixSecondes-3.m4a in Resources */,
+				1D594A945DDC7D6084E4FCAE /* coach-dixSecondes-4.m4a in Resources */,
+				E3C081EF16951AAFC25E5D3A /* coach-fin-1.m4a in Resources */,
+				56116FBD2AC79F5D191601C2 /* coach-miTravail-1.m4a in Resources */,
+				0F51C343ADF0C2638C6D4524 /* coach-miTravail-2.m4a in Resources */,
+				D04000059D19457DD1276984 /* coach-miTravail-3.m4a in Resources */,
+				05EC7D4DC1C10265ACE629EE /* coach-miTravail-4.m4a in Resources */,
+				58224EF958F63B3EC46BBF50 /* coach-repos-1.m4a in Resources */,
+				521D3EDDCEC6BBB6694B37D2 /* coach-repos-2.m4a in Resources */,
+				B1B9737BB41F3888C80799C2 /* coach-repos-3.m4a in Resources */,
+				23182CB6D06849743924AC83 /* coach-repos-4.m4a in Resources */,
 				2B2D93532F2BD80860021B01 /* crossfit-seance-type.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
