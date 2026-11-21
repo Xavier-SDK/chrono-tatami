@@ -4,13 +4,24 @@ import ChronoTatamiCore
 struct ListeSeances: View {
     @Environment(Bibliotheque.self) private var bib
     @State private var importer = false
+    @State private var reglages = false
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("Chrono Tatami")
-                        .font(Theme.affiche(18)).tracking(2.8).foregroundStyle(Theme.citron).textCase(.uppercase)
+                    HStack {
+                        Text("Chrono Tatami")
+                            .font(Theme.affiche(18)).tracking(2.8).foregroundStyle(Theme.citron).textCase(.uppercase)
+                        Spacer()
+                        Button { reglages = true } label: {
+                            Image(systemName: "slider.horizontal.3").font(.system(size: 18, weight: .semibold))
+                                .frame(width: 44, height: 44)
+                                .background(Theme.panneau2, in: .circle)
+                        }
+                        .foregroundStyle(Theme.texte)
+                        .accessibilityLabel("Réglages")
+                    }
                     Text("Séances")
                         .font(Theme.affiche(52)).textCase(.uppercase).foregroundStyle(Theme.texte)
                     if let e = bib.erreur {
@@ -41,6 +52,7 @@ struct ListeSeances: View {
                 if case let .success(u) = r { bib.importer(u) }
             }
             .toolbar(.hidden, for: .navigationBar)
+            .sheet(isPresented: $reglages) { VueReglages() }
         }
     }
 }

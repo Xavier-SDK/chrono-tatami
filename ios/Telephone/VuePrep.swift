@@ -8,6 +8,11 @@ struct VuePrep: View {
     @State private var depart = 0
     @State private var ouvert: Int?
     @State private var seance: Seance?
+    @State private var musique: Set<Int>?
+    @State private var voirPlaylist = false
+    @AppStorage("musVol") private var volume = 0.8
+    @AppStorage("musBas") private var baisse = 20.0
+    @Environment(Playlist.self) private var playlist
     @Environment(\.dismiss) private var fermer
 
     var body: some View {
@@ -41,6 +46,8 @@ struct VuePrep: View {
                 }
                 .font(Theme.texte(16)).padding(14).background(Theme.panneau, in: .rect(cornerRadius: 14))
 
+                reglagesMusique(c)
+
                 Text("Déroulé").font(Theme.affiche(15)).tracking(2).textCase(.uppercase).foregroundStyle(Theme.discret)
                 ForEach(Array(c.blocs.enumerated()), id: \.offset) { i, b in
                     ligne(i, b, debut: c.blocs[..<i].reduce(0) { $0 + $1.duree })
@@ -53,7 +60,8 @@ struct VuePrep: View {
         .toolbar(.hidden, for: .navigationBar)
         .safeAreaInset(edge: .bottom) {
             Button {
-                let s = Seance(cours: c, depuisBloc: depart, voix: voix, voixChaqueRound: voixRounds)
+                let s = Seance(cours: c, depuisBloc: depart, voix: voix, voixChaqueRound: voixRounds,
+                               playlist: playlist, sectionsMusique: sectionsMusique(c))
                 seance = s
             } label: {
                 Text(depart == 0 ? "Go" : "Go depuis « \(c.blocs[depart].titre) »")
@@ -65,10 +73,58 @@ struct VuePrep: View {
             .padding(.horizontal, 20).padding(.bottom, 8)
             .background(LinearGradient(colors: [Theme.encre.opacity(0), Theme.encre], startPoint: .top, endPoint: .center))
         }
+        .sheet(isPresented: $voirPlaylist) { VuePlaylist() }
         .fullScreenCover(item: $seance) { s in
             VueCourse(seance: s) { s.quitter(); seance = nil }
                 .onAppear { s.lancer() }
         }
+    }
+
+    /// Choix fait ici, sinon les sections marquées ♪ dans la fiche.
+    private func sectionsMusique(_ c: Cours) -> Set<Int> {
+        musique ?? Set(c.sections.indices.filter { c.sections[$0].musique })
+    }
+
+    private func reglagesMusique(_ c: Cours) -> some View {
+        let choix = sectionsMusique(c)
+        return VStack(alignment: .leading, spacing: 10) {
+            Button { voirPlaylist = true } label: {
+                HStack {
+                    Label("Musique", systemImage: "music.note").font(Theme.texte(17, gras: true))
+                    Spacer()
+                    Text(playlist.resume)
+                        .foregroundStyle(Theme.attenue)
+                    Image(systemName: "chevron.right").foregroundStyle(Theme.discret)
+                }
+            }
+            .buttonStyle(.plain)
+            ForEach(Array(c.sections.enumerated()), id: \.offset) { i, s in
+                Toggle(isOn: Binding(get: { choix.contains(i) }, set: { on in
+                    var n = choix
+                    if on { n.insert(i) } else { n.remove(i) }
+                    musique = n
+                })) {
+                    HStack(spacing: 8) {
+                        Circle().fill(Theme.couleur(s.famille)).frame(width: 9, height: 9)
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text(s.titre)
+                            Text(minutes(s.duree) + (s.musique ? " · prévue dans la fiche" : ""))
+                                .font(Theme.texte(13)).foregroundStyle(Theme.discret)
+                        }
+                    }
+                }
+            }
+            .disabled(playlist.vide)
+            if !playlist.morceaux.isEmpty && playlist.appleMusic == nil {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Volume : \(Int(volume * 100)) %").font(Theme.texte(14)).foregroundStyle(Theme.attenue)
+                    Slider(value: $volume, in: 0...1)
+                    Text("Pendant la voix et les consignes : \(Int(baisse)) %").font(Theme.texte(14)).foregroundStyle(Theme.attenue)
+                    Slider(value: $baisse, in: 0...60, step: 5)
+                }
+            }
+        }
+        .font(Theme.texte(16)).padding(14).background(Theme.panneau, in: .rect(cornerRadius: 14))
     }
 
     private func stat(_ k: String, _ v: String) -> some View {

@@ -57,3 +57,14 @@ private func fiche() throws -> String {
     #expect(q.miRound == "Changez")
     #expect(q.duree == 60)
 }
+
+@Test func lectureDeLaSeanceCrossFit() throws {
+    let url = try #require(Bundle.module.url(forResource: "crossfit-seance-type", withExtension: "md", subdirectory: "Fixtures"))
+    let c = lireCours(try String(contentsOf: url, encoding: .utf8))
+    #expect(c.erreurs == [])
+    #expect(c.estValide)
+    #expect(c.total == 60 * 60)
+    #expect(c.sections.map(\.famille) == [.ouverture, .echauffement, .techniques, .pratique, .calme])
+    #expect(c.sections.map(\.musique) == [false, true, false, true, false])
+    #expect(c.blocs.allSatisfy { $0.duree == ($0.prevu ?? 0) * 60 })
+}

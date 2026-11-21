@@ -66,3 +66,21 @@ private let deuxBlocs = lireCours("""
     #expect(e.suivant == "Récup")
     #expect(formatChrono(e.restant) == "0:15")
 }
+
+@Test func modeCoach() {
+    let c = lireCours("""
+    ## Techniques · 3 min
+    ### Bloc · 3 min
+    - [travail] R1 · 1:00
+    - [repos] Repos · 0:30
+    - [travail] R2 · 1:00
+    - [repos] Repos · 0:30
+    """)
+    var ch = Chrono(cours: c)
+    ch.coach = true
+    _ = ch.demarrer()
+    var tout: [Evenement] = []
+    for _ in 0..<1900 { tout += ch.avancer(0.1) }
+    let enc = tout.compactMap { if case let .encouragement(e) = $0 { e } else { nil } }
+    #expect(enc == [.miTravail, .dixSecondes, .repos, .dernierRound, .miTravail, .dixSecondes, .repos, .fin])
+}

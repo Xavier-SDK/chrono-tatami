@@ -4,11 +4,13 @@ import SwiftUI
 @main
 struct ChronoTatamiApp: App {
     @State private var bibliotheque = Bibliotheque()
+    @State private var playlist = Playlist()
 
     var body: some Scene {
         WindowGroup {
             ListeSeances()
                 .environment(bibliotheque)
+                .environment(playlist)
                 .preferredColorScheme(.dark)
                 .tint(Theme.citron)
         }

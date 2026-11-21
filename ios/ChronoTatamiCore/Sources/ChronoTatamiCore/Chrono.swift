@@ -10,6 +10,17 @@ public enum Evenement: Equatable, Sendable {
     case changementDeRole(String)
     case nouveauBloc(Int)
     case fin
+    case encouragement(Encouragement)
+}
+
+/// Relances du coach pendant la séance (mode coach).
+public enum Encouragement: String, CaseIterable, Sendable {
+    case debutTravail       // « C'est parti ! »
+    case miTravail          // « On tient le rythme ! »
+    case dixSecondes        // « Plus que 10 secondes, à fond ! »
+    case dernierRound       // « Dernier round, on donne tout ! »
+    case repos              // « Respirez, on récupère. »
+    case fin                // « Bravo, beau travail ! »
 }
 
 /// Une séquence placée sur la ligne de temps de la séance.
@@ -38,6 +49,8 @@ public struct Chrono: Sendable {
     public let segs: [Segment]
     public let total: Int
     public var voixChaqueRound = false
+    /// Mode coach : relances pendant le travail, le repos, le dernier round.
+    public var coach = false
 
     public private(set) var index = 0
     public private(set) var restant: Double = 0
@@ -87,8 +100,13 @@ public struct Chrono: Sendable {
             if !q.sequence.miRound.isEmpty, avant > cd / 2, restant <= cd / 2 {
                 ev += [.triple, .voix(q.sequence.miRound), .changementDeRole(q.sequence.miRound)]
             }
-            if let nx = suivant, nx.bloc != q.bloc, avant > 10, restant <= 10 {
+            let blocSuivant = suivant.map { $0.bloc != q.bloc } ?? false
+            if blocSuivant, let nx = suivant, avant > 10, restant <= 10 {
                 ev.append(.voix("Dans 10 secondes : " + cours.blocs[nx.bloc].titre))
+            }
+            if coach, q.sequence.type == .travail {
+                if !blocSuivant, cd >= 30, avant > 10, restant <= 10 { ev.append(.encouragement(.dixSecondes)) }
+                if q.sequence.miRound.isEmpty, cd >= 60, avant > cd / 2, restant <= cd / 2 { ev.append(.encouragement(.miTravail)) }
             }
         }
         while restant <= 0 && !termine {
@@ -119,8 +137,13 @@ public struct Chrono: Sendable {
             }
         } else if !silencieux {
             if q.sequence.type == .repos {
+                if coach, q.sequence.duree >= 15 { ev.append(.encouragement(.repos)) }
                 if voixChaqueRound { ev.append(.voix(q.sequence.libelle)) }
             } else {
+                if coach, q.sequence.type == .travail {
+                    let travaux = b.sequences.indices.filter { b.sequences[$0].type == .travail }
+                    ev.append(.encouragement(travaux.count > 1 && travaux.last == q.rang ? .dernierRound : .debutTravail))
+                }
                 ev.append(.double)
                 if voixChaqueRound {
                     ev.append(.voix(q.sequence.libelle.components(separatedBy: "·")[0].trimmingCharacters(in: .whitespaces)))
@@ -133,7 +156,8 @@ public struct Chrono: Sendable {
     private mutating func finir(silencieux: Bool) -> [Evenement] {
         termine = true
         enMarche = false
-        return silencieux ? [.fin] : [.gong, .voix("Fin de la séance. Salut.", forcee: true), .fin]
+        if silencieux { return [.fin] }
+        return coach ? [.gong, .encouragement(.fin), .fin] : [.gong, .voix("Fin de la séance. Salut.", forcee: true), .fin]
     }
 
     // MARK: Commandes de la pause (iPhone ou montre)
@@ -203,18 +227,25 @@ public struct EtatChrono: Codable, Sendable, Equatable {
     public var dureeSuivant: Int
     /// Moment de l'envoi : la montre en déduit le temps restant sans attendre le message suivant.
     public var horodatage: Double
+    /// Musique prévue sur la section en cours, et coupée ou non (bouton de la montre).
+    public var musiquePrevue = false
+    public var musiqueCoupee = false
+    /// Vitesse du chrono (10 en mode essai) : la montre décompte au même rythme que l'iPhone.
+    public var vitesse: Double = 1
+    /// Couleur de la phase choisie dans les réglages (0xRRGGBB), sinon celle par défaut.
+    public var couleur: UInt32?
 
     public var progressionSequence: Double { dureeSequence > 0 ? 1 - restant / dureeSequence : 0 }
 
     /// Temps restant estimé à l'instant `maintenant` (la montre continue de décompter entre deux messages).
     public func restant(a maintenant: Date) -> Double {
-        enMarche ? max(0, restant - (maintenant.timeIntervalSince1970 - horodatage)) : restant
+        enMarche ? max(0, restant - (maintenant.timeIntervalSince1970 - horodatage) * vitesse) : restant
     }
 }
 
 /// Commandes envoyées par la montre à l'iPhone.
 public enum CommandeMontre: String, Codable, Sendable {
-    case pause, reprendre, revenir, passer, plus30, moins30
+    case pause, reprendre, revenir, passer, plus30, moins30, couperMusique, remettreMusique
 }
 
 /// « 1:05 », « 0:09 »
